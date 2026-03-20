@@ -96,6 +96,7 @@ const getMatchLabel = (score: number, t: any): string => {
 };
 
 const SWIPE_THRESHOLD = 100;
+const DIRECTION_LOCK_THRESHOLD = 10;
 
 export default function SwipeFeed() {
   const navigate = useNavigate();
@@ -131,6 +132,7 @@ export default function SwipeFeed() {
   const [dragX, setDragX] = useState(0);
   const [exitDirection, setExitDirection] = useState<'left' | 'right' | null>(null);
   const swiping = useRef(false);
+  const [dragLocked, setDragLocked] = useState<'horizontal' | 'vertical' | null>(null);
 
   // Count active filters for badge
   const getActiveFilterCount = (): number => {
@@ -246,27 +248,53 @@ export default function SwipeFeed() {
 
   const swipeHandlers = useSwipeable({
     onSwiping: (e) => {
-      if (!swiping.current) setDragX(e.deltaX);
+      if (swiping.current) return;
+
+      // Determine direction lock on first significant movement
+      const absX = Math.abs(e.deltaX);
+      const absY = Math.abs(e.deltaY);
+
+      if (!dragLocked && (absX > DIRECTION_LOCK_THRESHOLD || absY > DIRECTION_LOCK_THRESHOLD)) {
+        if (absX > absY) {
+          setDragLocked('horizontal');
+        } else {
+          setDragLocked('vertical');
+          return;
+        }
+      }
+
+      // Only update card position if locked to horizontal
+      if (dragLocked === 'horizontal') {
+        setDragX(e.deltaX);
+      }
     },
     onSwipedLeft: () => {
-      if (Math.abs(dragX) >= SWIPE_THRESHOLD) {
+      if (dragLocked === 'horizontal' && Math.abs(dragX) >= SWIPE_THRESHOLD) {
         handleSkip();
       } else {
         setDragX(0);
       }
+      setDragLocked(null);
     },
     onSwipedRight: () => {
-      if (Math.abs(dragX) >= SWIPE_THRESHOLD) {
+      if (dragLocked === 'horizontal' && Math.abs(dragX) >= SWIPE_THRESHOLD) {
         handleApply();
       } else {
         setDragX(0);
       }
+      setDragLocked(null);
     },
     onSwiped: () => {
-      if (Math.abs(dragX) < SWIPE_THRESHOLD) setDragX(0);
+      if (dragLocked !== 'horizontal' || Math.abs(dragX) < SWIPE_THRESHOLD) {
+        setDragX(0);
+      }
+      setDragLocked(null);
     },
     trackMouse: true,
-    preventScrollOnSwipe: true,
+    trackTouch: true,
+    delta: 10,
+    preventScrollOnSwipe: false,
+    touchEventOptions: { passive: true },
   });
 
   const cardRotation = dragX * 0.08;
