@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { Clock, CheckCircle, ChevronRight } from 'lucide-react';
 import BottomNav from '../components/BottomNav';
@@ -52,6 +53,7 @@ function hasEmployerReply(conv: Conversation): boolean {
 }
 
 export default function AppliedJobs() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const applications = loadApplications();
 
@@ -72,7 +74,7 @@ export default function AppliedJobs() {
             fontWeight: 700,
           }}
         >
-          My Applications
+          {t('appliedJobs.title')}
         </h1>
         <p
           className="text-sm text-white/70 mt-1"
@@ -102,7 +104,7 @@ export default function AppliedJobs() {
                   color: AppColors.textDark,
                 }}
               >
-                No Applications Yet
+                {t('appliedJobs.empty_title')}
               </h2>
               <p
                 className="mb-6"
@@ -111,7 +113,7 @@ export default function AppliedJobs() {
                   color: AppColors.textMuted,
                 }}
               >
-                Start swiping to find jobs
+                {t('appliedJobs.empty_subtitle')}
               </p>
               <button
                 onClick={() => navigate('/swipe-feed')}
@@ -123,7 +125,7 @@ export default function AppliedJobs() {
                   color: AppColors.surfaceWhite,
                 }}
               >
-                Browse Jobs
+                {t('appliedJobs.browse_jobs')}
               </button>
             </div>
           ) : (
@@ -132,7 +134,7 @@ export default function AppliedJobs() {
               const statusColor = accepted
                 ? AppColors.greenLight
                 : AppColors.aiAmber;
-              const statusLabel = accepted ? 'Accepted' : 'Pending';
+              const statusLabel = accepted ? t('appliedJobs.accepted') : t('appliedJobs.pending');
               const StatusIcon = accepted ? CheckCircle : Clock;
               const initial = conv.employerName.charAt(0).toUpperCase();
 
@@ -212,7 +214,7 @@ export default function AppliedJobs() {
                             style={{ color: statusColor }}
                           />
                           <span
-                            className="text-xs"
+                            className="text-[13px]"
                             style={{
                               fontFamily: 'DM Sans, sans-serif',
                               fontWeight: 600,
@@ -225,7 +227,7 @@ export default function AppliedJobs() {
 
                         {/* Date */}
                         <span
-                          className="text-xs"
+                          className="text-[13px]"
                           style={{
                             fontFamily: 'DM Sans, sans-serif',
                             color: AppColors.textMuted,

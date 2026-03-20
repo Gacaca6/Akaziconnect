@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { Home, ClipboardList, MessageCircle, User } from 'lucide-react';
 
@@ -6,15 +7,16 @@ interface EmployerBottomNavProps {
   activeTab: 'home' | 'jobs' | 'messages' | 'profile';
 }
 
-const tabs = [
-  { id: 'home', icon: Home, label: 'Home', path: '/employer-dashboard' },
-  { id: 'jobs', icon: ClipboardList, label: 'My Jobs', path: '/my-listings' },
-  { id: 'messages', icon: MessageCircle, label: 'Messages', path: '/employer-messages' },
-  { id: 'profile', icon: User, label: 'Profile', path: '/employer-profile' },
+const tabDefs = [
+  { id: 'home', icon: Home, labelKey: 'nav.home', path: '/employer-dashboard' },
+  { id: 'jobs', icon: ClipboardList, labelKey: 'nav.my_jobs', path: '/my-listings' },
+  { id: 'messages', icon: MessageCircle, labelKey: 'nav.messages', path: '/employer-messages' },
+  { id: 'profile', icon: User, labelKey: 'nav.profile', path: '/employer-profile' },
 ] as const;
 
 export default function EmployerBottomNav({ activeTab }: EmployerBottomNavProps) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div
@@ -25,7 +27,7 @@ export default function EmployerBottomNav({ activeTab }: EmployerBottomNavProps)
       }}
     >
       <div className="flex justify-around items-center max-w-md mx-auto">
-        {tabs.map((tab) => {
+        {tabDefs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
 
@@ -43,14 +45,14 @@ export default function EmployerBottomNav({ activeTab }: EmployerBottomNavProps)
                 style={{ color: isActive ? AppColors.forestGreen : AppColors.textMuted }}
               />
               <span
-                className="text-xs"
+                className="text-[13px]"
                 style={{
                   fontFamily: 'DM Sans, sans-serif',
                   fontWeight: isActive ? 600 : 400,
                   color: isActive ? AppColors.forestGreen : AppColors.textMuted,
                 }}
               >
-                {tab.label}
+                {t(tab.labelKey)}
               </span>
             </button>
           );

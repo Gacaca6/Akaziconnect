@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { BadgeCheck } from 'lucide-react';
 import { motion } from 'motion/react';
@@ -6,13 +7,14 @@ import type { Job } from '../constants/mockJobs';
 
 export default function ApplicationSent() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const location = useLocation();
   const job = (location.state as { job?: Job })?.job;
 
   const steps = [
-    { emoji: '📬', text: 'The employer reviews your application' },
-    { emoji: '💬', text: 'They message you if interested' },
-    { emoji: '✅', text: 'You confirm and start work' },
+    { emoji: '📬', text: t('applicationSent.step1') },
+    { emoji: '💬', text: t('applicationSent.step2') },
+    { emoji: '✅', text: t('applicationSent.step3') },
   ];
 
   return (
@@ -71,7 +73,7 @@ export default function ApplicationSent() {
           className="text-white text-center mb-2"
           style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: '28px' }}
         >
-          Application Sent!
+          {t('applicationSent.title')}
         </motion.h1>
 
         <motion.p
@@ -81,7 +83,7 @@ export default function ApplicationSent() {
           className="text-white/70 text-center"
           style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '15px', maxWidth: '280px' }}
         >
-          Your application is on its way to the employer
+          {t('applicationSent.subtitle')}
         </motion.p>
       </div>
 
@@ -138,7 +140,7 @@ export default function ApplicationSent() {
               className="text-base mb-4"
               style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, color: AppColors.textDark }}
             >
-              What happens next
+              {t('applicationSent.what_next')}
             </h3>
             <div className="space-y-4">
               {steps.map(({ emoji, text }, i) => (
@@ -169,7 +171,7 @@ export default function ApplicationSent() {
           {/* Buttons */}
           <div className="space-y-3 pt-2">
             <button
-              onClick={() => navigate('/swipe-feed')}
+              onClick={() => navigate('/swipe-feed', { state: { applied: true, employerName: job?.employer } })}
               className="w-full py-4 rounded-2xl transition-transform active:scale-98"
               style={{
                 backgroundColor: AppColors.greenLight,
@@ -180,7 +182,7 @@ export default function ApplicationSent() {
                 boxShadow: '0 4px 12px rgba(26, 122, 74, 0.2)',
               }}
             >
-              Browse More Jobs
+              {t('applicationSent.browse_more')}
             </button>
             <button
               onClick={() => navigate('/applied')}
@@ -194,7 +196,7 @@ export default function ApplicationSent() {
                 border: `1.5px solid ${AppColors.forestGreen}`,
               }}
             >
-              View My Applications
+              {t('applicationSent.view_applications')}
             </button>
           </div>
         </div>

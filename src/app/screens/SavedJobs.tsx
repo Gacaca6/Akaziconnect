@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft, BadgeCheck, MapPin, Calendar, Trash2 } from 'lucide-react';
 import type { Job } from '../constants/mockJobs';
@@ -13,6 +14,7 @@ function loadSavedJobs(): Job[] {
 }
 
 export default function SavedJobs() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [jobs, setJobs] = useState<Job[]>(loadSavedJobs);
 
@@ -31,7 +33,7 @@ export default function SavedJobs() {
       >
         <button
           onClick={() => navigate(-1)}
-          className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+          className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
           style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
         >
           <ArrowLeft className="w-5 h-5 text-white" />
@@ -40,7 +42,7 @@ export default function SavedJobs() {
           className="flex-1 text-center text-lg text-white pr-9"
           style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700 }}
         >
-          Saved Jobs
+          {t('savedJobs.title')}
         </h1>
       </div>
 
@@ -57,7 +59,7 @@ export default function SavedJobs() {
                 color: AppColors.textDark,
               }}
             >
-              No saved jobs yet
+              {t('savedJobs.empty_title')}
             </h2>
             <p
               className="mb-6"
@@ -67,7 +69,7 @@ export default function SavedJobs() {
                 lineHeight: 1.6,
               }}
             >
-              Tap the heart on any job to save it for later
+              {t('savedJobs.empty_subtitle')}
             </p>
             <button
               onClick={() => navigate('/swipe-feed')}
@@ -82,7 +84,7 @@ export default function SavedJobs() {
                 boxShadow: '0 4px 12px rgba(26,122,74,0.2)',
               }}
             >
-              Browse Jobs
+              {t('savedJobs.browse_jobs')}
             </button>
           </div>
         </div>
@@ -129,7 +131,7 @@ export default function SavedJobs() {
                   >
                     <MapPin className="w-3.5 h-3.5" style={{ color: AppColors.forestGreen }} />
                     <span
-                      className="text-xs"
+                      className="text-[13px]"
                       style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textDark }}
                     >
                       {job.distance}
@@ -141,7 +143,7 @@ export default function SavedJobs() {
                   >
                     <Calendar className="w-3.5 h-3.5" style={{ color: AppColors.forestGreen }} />
                     <span
-                      className="text-xs"
+                      className="text-[13px]"
                       style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textDark }}
                     >
                       {job.duration}
@@ -177,7 +179,7 @@ export default function SavedJobs() {
                       boxShadow: '0 4px 12px rgba(26,122,74,0.2)',
                     }}
                   >
-                    Apply Now
+                    {t('savedJobs.apply_now')}
                   </button>
                   <button
                     onClick={() => removeJob(job.id)}
@@ -193,7 +195,7 @@ export default function SavedJobs() {
                     }}
                   >
                     <Trash2 className="w-4 h-4" />
-                    Remove
+                    {t('savedJobs.remove')}
                   </button>
                 </div>
               </div>

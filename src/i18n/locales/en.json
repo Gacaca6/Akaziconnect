@@ -1,0 +1,382 @@
+{
+  "onboarding": {
+    "slide1_title": "Find Work Near You",
+    "slide1_subtitle": "Discover jobs in your area — farming, construction, delivery and more. No CV needed.",
+    "slide2_title": "Swipe to Apply",
+    "slide2_subtitle": "Swipe right on jobs you like. Our AI instantly writes your application for you.",
+    "slide3_title": "Get Hired Fast",
+    "slide3_subtitle": "Employers in your area see your profile and reach out directly. Start working within days.",
+    "skip": "Skip",
+    "get_started": "Get Started",
+    "next": "Next"
+  },
+  "roleSelection": {
+    "welcome": "Welcome!",
+    "subtitle": "What brings you to Akazi Connect today?",
+    "seeker_title": "I am Looking for Work",
+    "seeker_subtitle": "Find jobs near you and apply with AI",
+    "employer_title": "I am Hiring",
+    "employer_subtitle": "Post jobs and find workers fast",
+    "continue": "Continue"
+  },
+  "phoneEntry": {
+    "title": "Enter your number",
+    "subtitle": "We will send you a verification code",
+    "placeholder": "Your phone number",
+    "continue": "Continue",
+    "reassurance": "Your number is only used for login"
+  },
+  "otp": {
+    "title": "Verify your number",
+    "subtitle": "We just sent a secret code to {{phone}} — type it below",
+    "verify": "Verify",
+    "resend": "Resend code",
+    "resend_wait": "Resend in",
+    "didnt_receive": "No code yet? Wait 30 seconds then tap Resend"
+  },
+  "profileSetup": {
+    "title": "Your Profile",
+    "subtitle": "This replaces your CV — fill it once, use it forever",
+    "step1_title": "What is your name?",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "location_placeholder": "Your sector or cell e.g. Musanze",
+    "step2_title": "Select your skills",
+    "step2_subtitle": "Choose all that apply — this is how employers find you",
+    "step3_title": "When can you work?",
+    "step4_title": "How should we write your applications?",
+    "step4_subtitle": "Your AI assistant will write job applications in this language",
+    "next": "Next",
+    "finish": "Finish",
+    "back": "Back",
+    "days_per_week": "Days per week",
+    "no_skills": "No skills added yet",
+    "skills": {
+      "farming": "Farming",
+      "construction": "Construction",
+      "driving": "Driving",
+      "delivery": "Delivery",
+      "gardening": "Gardening",
+      "cooking": "Cooking",
+      "cleaning": "Cleaning",
+      "sales": "Sales",
+      "repairs": "Repairs",
+      "livestock": "Livestock",
+      "forestry": "Forestry",
+      "masonry": "Masonry",
+      "irrigation": "Irrigation",
+      "teaching": "Teaching",
+      "health_worker": "Health Worker"
+    },
+    "availability": {
+      "immediately": "Immediately",
+      "immediately_desc": "Can start right away",
+      "this_week": "This week",
+      "this_week_desc": "Available within 7 days",
+      "this_month": "This month",
+      "this_month_desc": "Available within 30 days",
+      "flexible": "Flexible",
+      "flexible_desc": "Open to discuss"
+    },
+    "days": {
+      "1_2": "1-2 days",
+      "3_4": "3-4 days",
+      "5_6": "5-6 days",
+      "full_time": "Full time"
+    }
+  },
+  "swipeFeed": {
+    "title": "Jobs Near You",
+    "opportunities": "opportunities available",
+    "apply": "Apply",
+    "skip": "Skip",
+    "search_placeholder": "Search jobs...",
+    "pay_rate": "Pay Rate",
+    "about_job": "About this job",
+    "workers_needed": "needed",
+    "no_jobs_title": "No jobs available",
+    "no_jobs_subtitle": "Check back soon for new opportunities",
+    "location": "Location",
+    "duration": "Duration",
+    "workers": "Workers",
+    "clear_filters": "Clear Filters",
+    "application_sent_banner": "Application sent to {{employer}}!",
+    "match_great": "Great fit for you",
+    "match_good": "Good fit",
+    "match_possible": "Possible fit"
+  },
+  "aiReview": {
+    "title": "Your Application",
+    "subtitle": "AI-written for you — edit freely",
+    "sending": "Sending...",
+    "send": "Send Application",
+    "generating": "Generating...",
+    "ai_writing": "AI is writing your application..."
+  },
+  "applicationSent": {
+    "title": "Application Sent!",
+    "subtitle": "Your application is on its way to the employer",
+    "what_next": "What happens next",
+    "step1": "The employer reviews your application",
+    "step2": "They message you if interested",
+    "step3": "You confirm and start work",
+    "browse_more": "Browse More Jobs",
+    "view_applications": "View My Applications"
+  },
+  "common": {
+    "back": "Back",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try Again",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "employerSetup": {
+    "title": "Employer Profile",
+    "subtitle": "Set up once — start hiring today",
+    "step1_title": "Tell us about your organisation",
+    "org_name_placeholder": "e.g. Musanze Tea Cooperative",
+    "location_placeholder": "Your sector or cell",
+    "step2_title": "How can workers reach you?",
+    "step3_title": "What kind of workers do you need?",
+    "next": "Next",
+    "finish": "Finish",
+    "employer_type_label": "Type of employer",
+    "employer_types": {
+      "farm": "Farm / Agriculture",
+      "construction": "Construction",
+      "small_business": "Small Business",
+      "ngo": "NGO / Charity",
+      "cooperative": "Cooperative",
+      "individual": "Individual"
+    },
+    "contact_phone": "Phone Call",
+    "contact_phone_desc": "Workers call you directly",
+    "contact_message": "In-App Message",
+    "contact_message_desc": "Chat through Akazi Connect",
+    "whatsapp_label": "WhatsApp number (optional)",
+    "verification_text": "Verified employers get 3x more applicants — verification is free and takes 24 hours",
+    "request_verification": "Request Verification",
+    "work_types_label": "Types of work you hire for",
+    "workers_needed_label": "How many workers do you typically need?",
+    "job_types": {
+      "casual": "Casual (daily)",
+      "short_term": "Short-term (weeks)",
+      "long_term": "Long-term (months)",
+      "apprentice": "Apprentice"
+    }
+  },
+  "swipeFeedCards": {
+    "pay_rate": "Pay Rate",
+    "about_job": "About this job",
+    "what_you_need": "What you need",
+    "ai_insight": "AI Insight",
+    "save_job": "Save Job",
+    "saved": "Saved",
+    "apply_now": "Apply Now",
+    "distance": "km away",
+    "needed": "needed"
+  },
+  "jobDetail": {
+    "title": "Job Details",
+    "save_job": "Save Job",
+    "saved": "Saved",
+    "apply_now": "Apply Now",
+    "about_job": "About this job",
+    "what_you_need": "What you need",
+    "pay_rate": "Pay Rate",
+    "ai_insight": "AI Insight"
+  },
+  "appliedJobs": {
+    "title": "My Applications",
+    "empty_title": "No applications yet",
+    "empty_subtitle": "Start swiping to find jobs",
+    "browse_jobs": "Browse Jobs",
+    "pending": "Pending",
+    "accepted": "Accepted",
+    "applied_on": "Applied"
+  },
+  "messages": {
+    "title": "Messages",
+    "empty_title": "No messages yet",
+    "empty_subtitle": "Apply for jobs to start conversations with employers",
+    "browse_jobs": "Browse Jobs",
+    "search_placeholder": "Search conversations...",
+    "you": "You"
+  },
+  "messageThread": {
+    "type_message": "Type a message...",
+    "applied_for": "Applied for"
+  },
+  "profile": {
+    "title": "My Profile",
+    "edit_profile": "Edit Profile",
+    "my_skills": "My Skills",
+    "edit_skills": "Edit Skills",
+    "availability": "Availability",
+    "available": "Available",
+    "days_per_week": "Days per week",
+    "app_language": "Application Language",
+    "my_activity": "My Activity",
+    "applications": "Applications",
+    "saved_jobs": "Saved",
+    "rating": "Rating",
+    "notifications": "Notifications",
+    "language_settings": "Language Settings",
+    "privacy": "Privacy & Security",
+    "help": "Help & Support",
+    "contact": "Contact Us",
+    "sign_out": "Sign Out"
+  },
+  "savedJobs": {
+    "title": "Saved Jobs",
+    "empty_title": "No saved jobs yet",
+    "empty_subtitle": "Tap the heart on any job to save it for later",
+    "browse_jobs": "Browse Jobs",
+    "apply_now": "Apply Now",
+    "remove": "Remove"
+  },
+  "filterSearch": {
+    "title": "Filter Jobs",
+    "reset_all": "Reset All",
+    "job_type": "Job Type",
+    "distance": "Distance",
+    "pay_rate": "Minimum Pay",
+    "availability": "Availability",
+    "sort_by": "Sort By",
+    "show_jobs": "Show {{count}} Jobs",
+    "any": "Any",
+    "best_match": "Best Match",
+    "nearest": "Nearest",
+    "highest_pay": "Highest Pay",
+    "most_recent": "Most Recent",
+    "today": "Today",
+    "this_week": "This Week",
+    "this_month": "This Month"
+  },
+  "employerDashboard": {
+    "title": "Dashboard",
+    "total_listings": "Total Listings",
+    "active_jobs": "Active Jobs",
+    "total_applicants": "Applicants",
+    "recent_listings": "Recent Listings",
+    "view_all": "View All",
+    "post_job": "Post a Job",
+    "no_jobs_title": "No jobs posted yet",
+    "no_jobs_subtitle": "Post your first job to start finding workers",
+    "applicants": "applicants"
+  },
+  "postJob": {
+    "title": "Post a Job",
+    "step1_title": "What is the job?",
+    "job_title_label": "Job title",
+    "job_title_placeholder": "e.g. Tea Harvest Worker",
+    "job_type_label": "Job type",
+    "description_label": "Job description",
+    "description_placeholder": "Describe the work, requirements, what to bring...",
+    "step2_title": "Location, pay and duration",
+    "location_label": "Location",
+    "pay_amount_label": "Pay amount",
+    "pay_period_label": "Pay period",
+    "duration_label": "Duration",
+    "duration_placeholder": "e.g. 3 weeks, 2 months",
+    "workers_label": "Workers needed",
+    "step3_title": "Review your job post",
+    "publish": "Publish Job",
+    "next": "Next",
+    "about_job": "About this job",
+    "instant_publish": "Your job will be visible to workers in your area immediately after publishing",
+    "step_of": "Step {{current}} of {{total}}",
+    "location_placeholder": "e.g. Musanze District",
+    "pay_placeholder": "e.g. 5000",
+    "needed_suffix": "needed",
+    "job_types": {
+      "casual": "Casual",
+      "short_term": "Short-term",
+      "full_time": "Full-time",
+      "apprenticeship": "Apprenticeship"
+    },
+    "pay_periods": {
+      "per_day": "Per Day",
+      "per_week": "Per Week",
+      "per_month": "Per Month",
+      "fixed_total": "Fixed Total"
+    }
+  },
+  "myListings": {
+    "title": "My Job Listings",
+    "empty_title": "No jobs posted yet",
+    "empty_subtitle": "Tap the button below to post your first job",
+    "post_job": "Post a Job",
+    "active": "Active",
+    "closed": "Closed",
+    "applicants": "applicants",
+    "view_applicants": "View Applicants",
+    "close_job": "Close Job"
+  },
+  "applicantsList": {
+    "title": "Applicants",
+    "empty_title": "No applicants yet",
+    "empty_subtitle": "Share your job to attract workers",
+    "total_applicants": "total applicants",
+    "latest": "Latest",
+    "view_profile": "View Profile",
+    "message": "Message"
+  },
+  "applicantProfile": {
+    "title": "Applicant Profile",
+    "application": "Their Application",
+    "skills": "Skills",
+    "actions": "Actions",
+    "send_message": "Send Message",
+    "mark_accepted": "Mark as Accepted",
+    "accepted": "Accepted",
+    "applied_for": "Applied for",
+    "ai_match": "AI Match Score"
+  },
+  "employerProfile": {
+    "title": "Employer Profile",
+    "org_details": "Organisation Details",
+    "notifications": "Notifications",
+    "privacy": "Privacy & Security",
+    "help": "Help & Support",
+    "sign_out": "Sign Out"
+  },
+  "signOut": {
+    "title": "Sign Out?",
+    "subtitle": "Are you sure you want to sign out of Akazi Connect? You will need to log in again to access your account.",
+    "yes": "Yes, Sign Out",
+    "no": "No, Go Back",
+    "reassurance": "Your profile will be saved when you sign back in"
+  },
+  "privacy": {
+    "title": "Privacy & Security",
+    "delete_account": "Delete Account"
+  },
+  "help": {
+    "title": "Help & Support",
+    "contact_support": "Contact Support"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "send": "Send Message",
+    "placeholder": "Write your message here..."
+  },
+  "nav": {
+    "jobs": "Jobs",
+    "applied": "Applied",
+    "messages": "Messages",
+    "profile": "Profile",
+    "home": "Home",
+    "my_jobs": "My Jobs"
+  },
+  "languageSelection": {
+    "title": "Choose Your Language",
+    "subtitle": "Select the language you are most comfortable with",
+    "english": "English",
+    "english_sub": "Continue in English",
+    "kinyarwanda": "Kinyarwanda",
+    "kinyarwanda_sub": "Komeza mu Kinyarwanda",
+    "continue": "Continue"
+  }
+}

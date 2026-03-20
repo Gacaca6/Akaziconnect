@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft } from 'lucide-react';
 
@@ -40,6 +41,7 @@ const timeAgo = (dateStr: string): string => {
 export default function ApplicantProfile() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
   const conversation = (location.state as any)?.conversation as Conversation | undefined;
 
   const [accepted, setAccepted] = useState(() => {
@@ -142,7 +144,7 @@ export default function ApplicantProfile() {
         <div className="flex items-center gap-4 mb-6">
           <button
             onClick={() => navigate(-1)}
-            className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+            className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
             style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
           >
             <ArrowLeft className="w-5 h-5 text-white" />
@@ -152,7 +154,7 @@ export default function ApplicantProfile() {
               className="text-lg text-white"
               style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700 }}
             >
-              Applicant Profile
+              {t('applicantProfile.title')}
             </h1>
           </div>
         </div>
@@ -194,7 +196,7 @@ export default function ApplicantProfile() {
             className="text-white/70 mb-1"
             style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 14 }}
           >
-            Applied for: {conversation.jobTitle}
+            {t('applicantProfile.applied_for')}: {conversation.jobTitle}
           </p>
 
           <p
@@ -219,7 +221,7 @@ export default function ApplicantProfile() {
                 color: AppColors.textDark,
               }}
             >
-              📝 Their Application
+              📝 {t('applicantProfile.application')}
             </h3>
             <div
               className="p-4 rounded-2xl"
@@ -248,7 +250,7 @@ export default function ApplicantProfile() {
                 color: AppColors.textDark,
               }}
             >
-              💪 Skills
+              💪 {t('applicantProfile.skills')}
             </h3>
             <div
               className="p-4 rounded-2xl"
@@ -276,7 +278,7 @@ export default function ApplicantProfile() {
                 color: AppColors.textDark,
               }}
             >
-              📞 Actions
+              📞 {t('applicantProfile.actions')}
             </h3>
             <div className="space-y-3">
               <button
@@ -297,7 +299,7 @@ export default function ApplicantProfile() {
                     fontSize: 16,
                   }}
                 >
-                  💬 Send Message
+                  💬 {t('applicantProfile.send_message')}
                 </span>
               </button>
 
@@ -320,7 +322,7 @@ export default function ApplicantProfile() {
                     color: AppColors.forestGreen,
                   }}
                 >
-                  {accepted ? '✅ Accepted' : '✅ Mark as Accepted'}
+                  {accepted ? `✅ ${t('applicantProfile.accepted')}` : `✅ ${t('applicantProfile.mark_accepted')}`}
                 </span>
               </button>
             </div>

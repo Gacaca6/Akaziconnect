@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { Briefcase, Building2 } from 'lucide-react';
 import logo from '../../assets/logo.png';
 
 export default function RoleSelection() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [selectedRole, setSelectedRole] = useState<'seeker' | 'employer' | null>(null);
 
   const handleContinue = () => {
@@ -46,7 +48,7 @@ export default function RoleSelection() {
               color: AppColors.textDark 
             }}
           >
-            Wasuye neza! Welcome!
+            {t('roleSelection.welcome')}
           </h2>
           <p 
             className="mb-8"
@@ -55,7 +57,7 @@ export default function RoleSelection() {
               color: AppColors.textMuted 
             }}
           >
-            Tell us how you'd like to use Akazi Connect
+            {t('roleSelection.subtitle')}
           </p>
 
           {/* Role Cards */}
@@ -91,7 +93,7 @@ export default function RoleSelection() {
                       color: AppColors.textDark 
                     }}
                   >
-                    I'm Looking for Work
+                    {t('roleSelection.seeker_title')}
                   </h3>
                   <p 
                     className="text-sm"
@@ -100,7 +102,7 @@ export default function RoleSelection() {
                       color: AppColors.textMuted 
                     }}
                   >
-                    Find jobs near you and apply with one swipe
+                    {t('roleSelection.seeker_subtitle')}
                   </p>
                 </div>
               </div>
@@ -137,7 +139,7 @@ export default function RoleSelection() {
                       color: AppColors.textDark 
                     }}
                   >
-                    I'm Hiring Workers
+                    {t('roleSelection.employer_title')}
                   </h3>
                   <p 
                     className="text-sm"
@@ -146,7 +148,7 @@ export default function RoleSelection() {
                       color: AppColors.textMuted 
                     }}
                   >
-                    Post jobs and receive qualified applicants
+                    {t('roleSelection.employer_subtitle')}
                   </p>
                 </div>
               </div>
@@ -166,7 +168,7 @@ export default function RoleSelection() {
                 fontSize: '16px'
               }}
             >
-              Continue
+              {t('roleSelection.continue')}
             </button>
           )}
         </div>

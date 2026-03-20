@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft, Minus, Plus, MapPin, Calendar, Users, BadgeCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -8,13 +9,18 @@ const TOTAL_STEPS = 3;
 const STORAGE_KEY = 'postJobDraft';
 
 const JOB_TYPES = [
-  { emoji: '⏱️', label: 'Casual' },
-  { emoji: '📅', label: 'Short-term' },
-  { emoji: '🗓️', label: 'Full-time' },
-  { emoji: '🎓', label: 'Apprenticeship' },
+  { emoji: '⏱️', id: 'Casual', labelKey: 'postJob.job_types.casual' },
+  { emoji: '📅', id: 'Short-term', labelKey: 'postJob.job_types.short_term' },
+  { emoji: '🗓️', id: 'Full-time', labelKey: 'postJob.job_types.full_time' },
+  { emoji: '🎓', id: 'Apprenticeship', labelKey: 'postJob.job_types.apprenticeship' },
 ];
 
-const PAY_PERIODS = ['Per Day', 'Per Week', 'Per Month', 'Fixed Total'];
+const PAY_PERIODS = [
+  { id: 'Per Day', labelKey: 'postJob.pay_periods.per_day' },
+  { id: 'Per Week', labelKey: 'postJob.pay_periods.per_week' },
+  { id: 'Per Month', labelKey: 'postJob.pay_periods.per_month' },
+  { id: 'Fixed Total', labelKey: 'postJob.pay_periods.fixed_total' },
+];
 
 interface JobDraft {
   title: string;
@@ -54,6 +60,7 @@ function getEmployerProfile() {
 
 export default function PostJob() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
   const [draft, setDraft] = useState<JobDraft>(loadDraft);
@@ -136,7 +143,7 @@ export default function PostJob() {
       >
         <button
           onClick={goBack}
-          className="p-2 rounded-xl"
+          className="p-2.5 rounded-xl"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
         >
           <ArrowLeft className="w-6 h-6 text-white" />
@@ -145,13 +152,13 @@ export default function PostJob() {
           className="flex-1 text-center text-xl text-white"
           style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700 }}
         >
-          Post a Job
+          {t('postJob.title')}
         </h1>
         <span
           className="text-white/70 flex-shrink-0"
           style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '13px', minWidth: '64px', textAlign: 'right' }}
         >
-          Step {step + 1} of 3
+          {t('postJob.step_of', { current: step + 1, total: 3 })}
         </span>
       </div>
 
@@ -223,7 +230,7 @@ export default function PostJob() {
             maxWidth: '448px',
           }}
         >
-          {step === TOTAL_STEPS - 1 ? '🚀 Publish Job' : 'Next'}
+          {step === TOTAL_STEPS - 1 ? `🚀 ${t('postJob.publish')}` : t('postJob.next')}
         </button>
       </div>
     </div>
@@ -312,28 +319,29 @@ function Step1({
   draft: JobDraft;
   update: (f: Partial<JobDraft>) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <>
-      <StepHeader emoji="📋" title="What is the job?" />
+      <StepHeader emoji="📋" title={t('postJob.step1_title')} />
 
       <div className="mb-4">
-        <FieldLabel>Job title</FieldLabel>
+        <FieldLabel>{t('postJob.job_title_label')}</FieldLabel>
         <InputField
           value={draft.title}
           onChange={(v) => update({ title: v })}
-          placeholder="e.g. Tea Harvest Worker"
+          placeholder={t('postJob.job_title_placeholder')}
         />
       </div>
 
       <div className="mb-4">
-        <FieldLabel>Job type</FieldLabel>
+        <FieldLabel>{t('postJob.job_type_label')}</FieldLabel>
         <div className="flex flex-wrap gap-2">
-          {JOB_TYPES.map(({ emoji, label }) => {
-            const selected = draft.type === label;
+          {JOB_TYPES.map(({ emoji, id, labelKey }) => {
+            const selected = draft.type === id;
             return (
               <button
-                key={label}
-                onClick={() => update({ type: label })}
+                key={id}
+                onClick={() => update({ type: id })}
                 className="flex items-center gap-1.5 px-4 py-2.5 rounded-full transition-all"
                 style={{
                   backgroundColor: selected ? AppColors.greenBackground : AppColors.surfaceWhite,
@@ -349,7 +357,7 @@ function Step1({
                     color: selected ? AppColors.forestGreen : AppColors.textDark,
                   }}
                 >
-                  {label}
+                  {t(labelKey)}
                 </span>
               </button>
             );
@@ -358,11 +366,11 @@ function Step1({
       </div>
 
       <div>
-        <FieldLabel>Job description</FieldLabel>
+        <FieldLabel>{t('postJob.description_label')}</FieldLabel>
         <textarea
           value={draft.description}
           onChange={(e) => update({ description: e.target.value })}
-          placeholder="Describe the work, requirements, what to bring..."
+          placeholder={t('postJob.description_placeholder')}
           rows={4}
           className="w-full px-3 py-3.5 rounded-xl resize-none focus:outline-none focus:ring-2"
           style={{
@@ -387,6 +395,7 @@ function Step2({
   draft: JobDraft;
   update: (f: Partial<JobDraft>) => void;
 }) {
+  const { t } = useTranslation();
   const adjustWorkers = (delta: number) => {
     const next = Math.max(1, Math.min(50, draft.workers + delta));
     update({ workers: next });
@@ -394,38 +403,38 @@ function Step2({
 
   return (
     <>
-      <StepHeader emoji="💰" title="Location, pay and duration" />
+      <StepHeader emoji="💰" title={t('postJob.step2_title')} />
 
       <div className="mb-4">
-        <FieldLabel>Location</FieldLabel>
+        <FieldLabel>{t('postJob.location_label')}</FieldLabel>
         <InputField
           value={draft.location}
           onChange={(v) => update({ location: v })}
-          placeholder="e.g. Musanze District"
+          placeholder={t('postJob.location_placeholder')}
           prefix="📍"
         />
       </div>
 
       <div className="mb-4">
-        <FieldLabel>Pay amount</FieldLabel>
+        <FieldLabel>{t('postJob.pay_amount_label')}</FieldLabel>
         <InputField
           value={draft.payAmount}
           onChange={(v) => update({ payAmount: v.replace(/[^0-9]/g, '') })}
-          placeholder="e.g. 5000"
+          placeholder={t('postJob.pay_placeholder')}
           type="text"
           suffix="RWF"
         />
       </div>
 
       <div className="mb-4">
-        <FieldLabel>Pay period</FieldLabel>
+        <FieldLabel>{t('postJob.pay_period_label')}</FieldLabel>
         <div className="flex gap-2 overflow-x-auto pb-2">
           {PAY_PERIODS.map((period) => {
-            const selected = draft.payPeriod === period;
+            const selected = draft.payPeriod === period.id;
             return (
               <button
-                key={period}
-                onClick={() => update({ payPeriod: period })}
+                key={period.id}
+                onClick={() => update({ payPeriod: period.id })}
                 className="flex-shrink-0 px-4 py-2.5 rounded-full transition-all"
                 style={{
                   backgroundColor: selected ? AppColors.forestGreen : AppColors.surfaceWhite,
@@ -437,7 +446,7 @@ function Step2({
                   whiteSpace: 'nowrap',
                 }}
               >
-                {period}
+                {t(period.labelKey)}
               </button>
             );
           })}
@@ -445,16 +454,16 @@ function Step2({
       </div>
 
       <div className="mb-4">
-        <FieldLabel>Duration</FieldLabel>
+        <FieldLabel>{t('postJob.duration_label')}</FieldLabel>
         <InputField
           value={draft.duration}
           onChange={(v) => update({ duration: v })}
-          placeholder="e.g. 3 weeks, 2 months"
+          placeholder={t('postJob.duration_placeholder')}
         />
       </div>
 
       <div>
-        <FieldLabel>Workers needed</FieldLabel>
+        <FieldLabel>{t('postJob.workers_label')}</FieldLabel>
         <div
           className="flex items-center justify-between rounded-xl px-4 py-3"
           style={{ border: `1px solid ${AppColors.border}`, backgroundColor: AppColors.surfaceWhite }}
@@ -462,7 +471,7 @@ function Step2({
           <button
             onClick={() => adjustWorkers(-1)}
             disabled={draft.workers <= 1}
-            className="w-10 h-10 rounded-full flex items-center justify-center transition-all"
+            className="w-11 h-11 rounded-full flex items-center justify-center transition-all"
             style={{
               backgroundColor: draft.workers <= 1 ? AppColors.surfaceLight : AppColors.greenBackground,
               border: `1.5px solid ${draft.workers <= 1 ? AppColors.border : AppColors.forestGreen}`,
@@ -485,7 +494,7 @@ function Step2({
           <button
             onClick={() => adjustWorkers(1)}
             disabled={draft.workers >= 50}
-            className="w-10 h-10 rounded-full flex items-center justify-center transition-all"
+            className="w-11 h-11 rounded-full flex items-center justify-center transition-all"
             style={{
               backgroundColor: draft.workers >= 50 ? AppColors.surfaceLight : AppColors.greenBackground,
               border: `1.5px solid ${draft.workers >= 50 ? AppColors.border : AppColors.forestGreen}`,
@@ -512,11 +521,12 @@ function Step3({
   draft: JobDraft;
   employer: { orgName: string; location: string };
 }) {
+  const { t } = useTranslation();
   const payRate = `${Number(draft.payAmount).toLocaleString()} RWF/${draft.payPeriod.replace('Per ', '').replace('Fixed Total', 'total').toLowerCase()}`;
 
   return (
     <>
-      <StepHeader emoji="👁️" title="Review your job post" />
+      <StepHeader emoji="👁️" title={t('postJob.step3_title')} />
 
       {/* Preview Card */}
       <div
@@ -534,7 +544,7 @@ function Step3({
           }}
         >
           <span
-            className="px-3 py-1 rounded-full text-xs"
+            className="px-3 py-1 rounded-full text-[13px]"
             style={{
               backgroundColor: 'rgba(255, 255, 255, 0.2)',
               color: 'white',
@@ -598,7 +608,7 @@ function Step3({
                 className="text-sm"
                 style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textDark }}
               >
-                {draft.workers} needed
+                {draft.workers} {t('postJob.needed_suffix')}
               </span>
             </div>
           </div>
@@ -609,7 +619,7 @@ function Step3({
               className="text-sm mb-1"
               style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textMuted }}
             >
-              Pay Rate
+              {t('postJob.pay_amount_label')}
             </p>
             <p
               className="text-2xl"
@@ -625,7 +635,7 @@ function Step3({
               className="text-sm mb-2"
               style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600, color: AppColors.textDark }}
             >
-              About this job
+              {t('postJob.about_job')}
             </p>
             <p
               className="text-sm leading-relaxed"
@@ -646,7 +656,7 @@ function Step3({
           className="text-sm"
           style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.forestGreen, lineHeight: '1.5' }}
         >
-          ✨ Your job will be visible to workers in your area immediately after publishing
+          {t('postJob.instant_publish')}
         </p>
       </div>
     </>

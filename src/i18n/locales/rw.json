@@ -1,0 +1,382 @@
+{
+  "onboarding": {
+    "slide1_title": "Shaka Akazi Hafi Yawe",
+    "slide1_subtitle": "Shaka imirimo mu karere kawe — ubuhinzi, ubwubatsi, gutanga no kureba. Nta CV ishakwa.",
+    "slide2_title": "Sunuza Gushaka Akazi",
+    "slide2_subtitle": "Sunuza ibikorwa bikugura. AI yacu izandika inyandiko yo gusaba akazi ako kanya.",
+    "slide3_title": "Bonera Akazi Vuba",
+    "slide3_subtitle": "Abakoresha mu karere kawe babona umwirondoro wawe bakakuvugisha. Tangira gukora mu minsi mike.",
+    "skip": "Simbuka",
+    "get_started": "Tangira",
+    "next": "Komeza"
+  },
+  "roleSelection": {
+    "welcome": "Murakaza neza!",
+    "subtitle": "Ni iki gituma uza kuri Akazi Connect uyu munsi?",
+    "seeker_title": "Ndashaka Akazi",
+    "seeker_subtitle": "Shaka akazi hafi yawe usabe ukoresheje AI",
+    "employer_title": "Ndashaka Abakozi",
+    "employer_subtitle": "Shyira imirimo no gushaka abakozi vuba",
+    "continue": "Komeza"
+  },
+  "phoneEntry": {
+    "title": "Injiza nimero yawe",
+    "subtitle": "Tuzakoherereza kode yo kwemeza",
+    "placeholder": "Nimero ya telephone",
+    "continue": "Komeza",
+    "reassurance": "Nimero yawe ikoreshwa gusa mu kwinjira"
+  },
+  "otp": {
+    "title": "Emeza nimero yawe",
+    "subtitle": "Twoherejwe kode y'ibanga kuri {{phone}} — yandike hano",
+    "verify": "Emeza",
+    "resend": "Ohereza kode nanone",
+    "resend_wait": "Ohereza nanone mu",
+    "didnt_receive": "Nta kode yabonetse? Tegereza amasegonda 30 hanyuma ukande Ohereza nanone"
+  },
+  "profileSetup": {
+    "title": "Umwirondoro Wawe",
+    "subtitle": "Urasimbura CV — uzuza rimwe, ukoresheje igihe cyose",
+    "step1_title": "Witwa nde?",
+    "first_name": "Izina ribanza",
+    "last_name": "Izina ry'umuryango",
+    "location_placeholder": "Segiteri cyangwa akagari kawe urugero Musanze",
+    "step2_title": "Hitamo ubuhanga bwawe",
+    "step2_subtitle": "Hitamo byose bikubahagarariye — ni uburyo abakoresha bakubona",
+    "step3_title": "Ni ryari ushobora gukora?",
+    "step4_title": "Twandike gute inyandiko zawe zo gusaba akazi?",
+    "step4_subtitle": "Umufasha wawe wa AI azandika inyandiko zo gusaba akazi mu rurimi rwo hasi",
+    "next": "Komeza",
+    "finish": "Rangiza",
+    "back": "Subira inyuma",
+    "days_per_week": "Iminsi mu cyumweru",
+    "no_skills": "Nta buhanga bwongewemo",
+    "skills": {
+      "farming": "Ubuhinzi",
+      "construction": "Ubwubatsi",
+      "driving": "Gutwara",
+      "delivery": "Kugeza",
+      "gardening": "Gutegura ubusitani",
+      "cooking": "Guteka",
+      "cleaning": "Isuku",
+      "sales": "Kugurisha",
+      "repairs": "Gusana",
+      "livestock": "Ubworozi",
+      "forestry": "Amashyamba",
+      "masonry": "Ubwubatsi bw'amabuye",
+      "irrigation": "Kuhira",
+      "teaching": "Kwigisha",
+      "health_worker": "Umukozi w'ubuzima"
+    },
+    "availability": {
+      "immediately": "Ako kanya",
+      "immediately_desc": "Nshobora gutangira ubu",
+      "this_week": "Iki cyumweru",
+      "this_week_desc": "Mboneka mu minsi 7",
+      "this_month": "Uku kwezi",
+      "this_month_desc": "Mboneka mu minsi 30",
+      "flexible": "Byoroshye",
+      "flexible_desc": "Tuganire"
+    },
+    "days": {
+      "1_2": "Iminsi 1-2",
+      "3_4": "Iminsi 3-4",
+      "5_6": "Iminsi 5-6",
+      "full_time": "Igihe cyose"
+    }
+  },
+  "swipeFeed": {
+    "title": "Imirimo Hafi Yawe",
+    "opportunities": "amahirwe aboneka",
+    "apply": "Saba",
+    "skip": "Reka",
+    "search_placeholder": "Shakisha imirimo...",
+    "pay_rate": "Igihembo",
+    "about_job": "Ibyerekeye akazi",
+    "workers_needed": "bakenewe",
+    "no_jobs_title": "Nta mirimo iboneka",
+    "no_jobs_subtitle": "Garuka vuba kureba amahirwe mashya",
+    "location": "Aho",
+    "duration": "Igihe",
+    "workers": "Abakozi",
+    "clear_filters": "Kuraho Ishungura",
+    "application_sent_banner": "Inyandiko yoherejwe kuri {{employer}}!",
+    "match_great": "Bikubahagarariye cyane",
+    "match_good": "Bikubahagarariye",
+    "match_possible": "Bishoboka"
+  },
+  "aiReview": {
+    "title": "Inyandiko Yawe",
+    "subtitle": "Yanditswe na AI — hindura neza",
+    "sending": "Ohereza...",
+    "send": "Ohereza Inyandiko",
+    "generating": "Gutegura...",
+    "ai_writing": "AI irategura inyandiko yawe..."
+  },
+  "applicationSent": {
+    "title": "Inyandiko Yoherejwe!",
+    "subtitle": "Inyandiko yawe igenda kuri mukiliya",
+    "what_next": "Iki ni iki gitegerezwa",
+    "step1": "Umukoresha asuzuma inyandiko yawe",
+    "step2": "Bakuvugisha niba banyuzwe",
+    "step3": "Wemeza utangire gukora",
+    "browse_more": "Shakisha Imirimo Yindi",
+    "view_applications": "Reba Inyandiko Zanjye"
+  },
+  "common": {
+    "back": "Subira",
+    "loading": "Gutegereza...",
+    "error": "Hari ikibazo cyabaye",
+    "retry": "Gerageza Nanone",
+    "save": "Bika",
+    "cancel": "Hagarika"
+  },
+  "employerSetup": {
+    "title": "Umwirondoro w'Umukoresha",
+    "subtitle": "Shyiraho rimwe — utangire gushaka abakozi uyu munsi",
+    "step1_title": "Tubereze ibyerekeye organisation yawe",
+    "org_name_placeholder": "urugero Musanze Tea Cooperative",
+    "location_placeholder": "Segiteri cyangwa akagari kawe",
+    "step2_title": "Abakozi bakubona bate?",
+    "step3_title": "Ni abakozi ba bwoko bwiki ukeneye?",
+    "next": "Komeza",
+    "finish": "Rangiza",
+    "employer_type_label": "Ubwoko bw'umukoresha",
+    "employer_types": {
+      "farm": "Isambu / Ubuhinzi",
+      "construction": "Ubwubatsi",
+      "small_business": "Ubucuruzi buto",
+      "ngo": "ONG / Urugaga",
+      "cooperative": "Koperative",
+      "individual": "Umuntu ku giti cye"
+    },
+    "contact_phone": "Guhamagara",
+    "contact_phone_desc": "Abakozi baguhamagara",
+    "contact_message": "Ubutumwa muri App",
+    "contact_message_desc": "Ganira binyuze muri Akazi Connect",
+    "whatsapp_label": "Nimero ya WhatsApp (ntibisabwa)",
+    "verification_text": "Abakoresha bemejwe babona abasabi 3x benshi — kwemeza ni ubuntu kandi bifata amasaha 24",
+    "request_verification": "Saba Kwemezwa",
+    "work_types_label": "Ubwoko bw'akazi ushaka abakozi",
+    "workers_needed_label": "Ni abakozi bangahe ukeneye muri rusange?",
+    "job_types": {
+      "casual": "By'umunsi (buri munsi)",
+      "short_term": "By'igihe gito (ibyumweru)",
+      "long_term": "By'igihe kirekire (amezi)",
+      "apprentice": "Kwiga umwuga"
+    }
+  },
+  "swipeFeedCards": {
+    "pay_rate": "Igihembo",
+    "about_job": "Ibyerekeye akazi",
+    "what_you_need": "Ibyo ukeneye",
+    "ai_insight": "Inama ya AI",
+    "save_job": "Bika Akazi",
+    "saved": "Byabitswe",
+    "apply_now": "Saba Ubu",
+    "distance": "km uvuye hano",
+    "needed": "bakenewe"
+  },
+  "jobDetail": {
+    "title": "Amakuru y'Akazi",
+    "save_job": "Bika Akazi",
+    "saved": "Byabitswe",
+    "apply_now": "Saba Ubu",
+    "about_job": "Ibyerekeye akazi",
+    "what_you_need": "Ibyo ukeneye",
+    "pay_rate": "Igihembo",
+    "ai_insight": "Inama ya AI"
+  },
+  "appliedJobs": {
+    "title": "Inyandiko Zanjye",
+    "empty_title": "Nta nyandiko zirabaho",
+    "empty_subtitle": "Tangira gusunuza kugira ngo ushake akazi",
+    "browse_jobs": "Shakisha Imirimo",
+    "pending": "Itegereje",
+    "accepted": "Yemerewe",
+    "applied_on": "Yasabwe"
+  },
+  "messages": {
+    "title": "Ubutumwa",
+    "empty_title": "Nta butumwa burabaho",
+    "empty_subtitle": "Saba akazi kugira ngo utangire kuvugana n'abakoresha",
+    "browse_jobs": "Shakisha Imirimo",
+    "search_placeholder": "Shakisha ikiganiro...",
+    "you": "Wewe"
+  },
+  "messageThread": {
+    "type_message": "Andika ubutumwa...",
+    "applied_for": "Yasabye"
+  },
+  "profile": {
+    "title": "Umwirondoro Wanjye",
+    "edit_profile": "Hindura Umwirondoro",
+    "my_skills": "Ubuhanga Bwanjye",
+    "edit_skills": "Hindura Ubuhanga",
+    "availability": "Ubushobozi",
+    "available": "Ubushobozi",
+    "days_per_week": "Iminsi mu cyumweru",
+    "app_language": "Ururimi rw'Inyandiko",
+    "my_activity": "Ibikorwa Byanjye",
+    "applications": "Inyandiko",
+    "saved_jobs": "Byabitswe",
+    "rating": "Amanota",
+    "notifications": "Imenyesha",
+    "language_settings": "Igenamiterere ry'Ururimi",
+    "privacy": "Intimacy n'Umutekano",
+    "help": "Ubufasha n'Inkunga",
+    "contact": "Twandikire",
+    "sign_out": "Sohoka"
+  },
+  "savedJobs": {
+    "title": "Imirimo Yabitswe",
+    "empty_title": "Nta mirimo yabitswe",
+    "empty_subtitle": "Kanda umutima ku kazi kugira ngo ubike nyuma",
+    "browse_jobs": "Shakisha Imirimo",
+    "apply_now": "Saba Ubu",
+    "remove": "Gukuraho"
+  },
+  "filterSearch": {
+    "title": "Shungura Imirimo",
+    "reset_all": "Subiramo Byose",
+    "job_type": "Ubwoko bw'Akazi",
+    "distance": "Intera",
+    "pay_rate": "Igihembo cy'Intangiriro",
+    "availability": "Ubushobozi",
+    "sort_by": "Rtondeka Hakurikijwe",
+    "show_jobs": "Erekana Imirimo {{count}}",
+    "any": "Yose",
+    "best_match": "Ikubahagarariye Neza",
+    "nearest": "Hafi Cyane",
+    "highest_pay": "Igihembo Kinini",
+    "most_recent": "Ibyoroshye Byashize",
+    "today": "Uyu munsi",
+    "this_week": "Iki cyumweru",
+    "this_month": "Uku kwezi"
+  },
+  "employerDashboard": {
+    "title": "Ikibaho",
+    "total_listings": "Imirimo Yose",
+    "active_jobs": "Imirimo Ifunguye",
+    "total_applicants": "Abasabi",
+    "recent_listings": "Imirimo Yaheruka",
+    "view_all": "Reba Yose",
+    "post_job": "Shyiraho Akazi",
+    "no_jobs_title": "Nta mirimo yashyiriweho",
+    "no_jobs_subtitle": "Shyiraho akazi kawe ka mbere kugira ngo utangire gushaka abakozi",
+    "applicants": "abasabi"
+  },
+  "postJob": {
+    "title": "Shyiraho Akazi",
+    "step1_title": "Ni akazi ka bwoko bwiki?",
+    "job_title_label": "Izina ry'akazi",
+    "job_title_placeholder": "urugero Umuhinzi w'Icyayi",
+    "job_type_label": "Ubwoko bw'akazi",
+    "description_label": "Ibisobanuro by'akazi",
+    "description_placeholder": "Sobanura akazi, ibishakwa, ibyo kuzana...",
+    "step2_title": "Aho, igihembo n'igihe",
+    "location_label": "Aho",
+    "pay_amount_label": "Igihembo",
+    "pay_period_label": "Igihe cy'Igihembo",
+    "duration_label": "Igihe",
+    "duration_placeholder": "urugero ibyumweru 3, amezi 2",
+    "workers_label": "Abakozi Bakenewe",
+    "step3_title": "Suzuma akazi kawe",
+    "publish": "Shyira Hanze Akazi",
+    "next": "Komeza",
+    "about_job": "Ibyerekeye akazi",
+    "instant_publish": "Akazi kawe kazaboneka ku bakozi mu karere kawe ako kanya nyuma yo gushyira hanze",
+    "step_of": "Intambwe {{current}} kuri {{total}}",
+    "location_placeholder": "urugero Akarere ka Musanze",
+    "pay_placeholder": "urugero 5000",
+    "needed_suffix": "bakenewe",
+    "job_types": {
+      "casual": "By'umunsi",
+      "short_term": "By'igihe gito",
+      "full_time": "Igihe cyose",
+      "apprenticeship": "Kwiga umwuga"
+    },
+    "pay_periods": {
+      "per_day": "Ku munsi",
+      "per_week": "Ku cyumweru",
+      "per_month": "Ku kwezi",
+      "fixed_total": "Igihembo Kidasubirwamo"
+    }
+  },
+  "myListings": {
+    "title": "Imirimo Yanjye",
+    "empty_title": "Nta mirimo yashyiriweho",
+    "empty_subtitle": "Kanda buto hepfo kugira ngo ushyireho akazi kawe ka mbere",
+    "post_job": "Shyiraho Akazi",
+    "active": "Ifunguye",
+    "closed": "Ifunzwe",
+    "applicants": "abasabi",
+    "view_applicants": "Reba Abasabi",
+    "close_job": "Funga Akazi"
+  },
+  "applicantsList": {
+    "title": "Abasabi",
+    "empty_title": "Nta basabi barabaho",
+    "empty_subtitle": "Sangira akazi kawe kugira ngo ubone abakozi",
+    "total_applicants": "abasabi bose",
+    "latest": "Ibyoroshye",
+    "view_profile": "Reba Umwirondoro",
+    "message": "Vugana"
+  },
+  "applicantProfile": {
+    "title": "Umwirondoro w'Usaba",
+    "application": "Inyandiko ye",
+    "skills": "Ubuhanga",
+    "actions": "Ibikorwa",
+    "send_message": "Ohereza Ubutumwa",
+    "mark_accepted": "Emeza ko Yemerewe",
+    "accepted": "Yemerewe",
+    "applied_for": "Yasabye",
+    "ai_match": "Amanota ya AI"
+  },
+  "employerProfile": {
+    "title": "Umwirondoro w'Umukoresha",
+    "org_details": "Amakuru y'Organisation",
+    "notifications": "Imenyesha",
+    "privacy": "Intimacy n'Umutekano",
+    "help": "Ubufasha n'Inkunga",
+    "sign_out": "Sohoka"
+  },
+  "signOut": {
+    "title": "Gusohoka?",
+    "subtitle": "Urizeye ko ushaka gusohoka kuri Akazi Connect? Uzakenera kwinjira nanone kugira ngo ubone konti yawe.",
+    "yes": "Yego, Sohoka",
+    "no": "Oya, Subira Inyuma",
+    "reassurance": "Umwirondoro wawe uzabikwa igihe uzasubira kwinjira"
+  },
+  "privacy": {
+    "title": "Intimacy n'Umutekano",
+    "delete_account": "Siba Konti"
+  },
+  "help": {
+    "title": "Ubufasha n'Inkunga",
+    "contact_support": "Vugana n'Inkunga"
+  },
+  "contact": {
+    "title": "Twandikire",
+    "send": "Ohereza Ubutumwa",
+    "placeholder": "Andika ubutumwa bwawe hano..."
+  },
+  "nav": {
+    "jobs": "Imirimo",
+    "applied": "Nasabye",
+    "messages": "Ubutumwa",
+    "profile": "Umwirondoro",
+    "home": "Ahabanza",
+    "my_jobs": "Imirimo Yanjye"
+  },
+  "languageSelection": {
+    "title": "Hitamo Ururimi",
+    "subtitle": "Hitamo ururimi uhishemo neza",
+    "english": "Icyongereza",
+    "english_sub": "Komeza mu Cyongereza",
+    "kinyarwanda": "Kinyarwanda",
+    "kinyarwanda_sub": "Komeza mu Kinyarwanda",
+    "continue": "Komeza"
+  }
+}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft, ChevronDown } from 'lucide-react';
 
@@ -28,6 +29,7 @@ const faqs = [
 
 export default function Help() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
@@ -44,7 +46,7 @@ export default function Help() {
       >
         <button
           onClick={() => navigate(-1)}
-          className="p-2 rounded-xl"
+          className="p-2.5 rounded-xl"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
         >
           <ArrowLeft className="w-6 h-6 text-white" />
@@ -57,7 +59,7 @@ export default function Help() {
             fontSize: '18px',
           }}
         >
-          Help & Support
+          {t('help.title')}
         </h1>
       </div>
 
@@ -150,7 +152,7 @@ export default function Help() {
               boxShadow: '0 4px 12px rgba(26, 122, 74, 0.2)',
             }}
           >
-            Contact Support
+            {t('help.contact_support')}
           </button>
         </div>
       </div>

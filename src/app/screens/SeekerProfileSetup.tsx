@@ -1,39 +1,45 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import logo from '../../assets/logo.png';
 
-const TOTAL_STEPS = 4;
+const TOTAL_STEPS = 3;
 const STORAGE_KEY = 'seekerProfileDraft';
 
 const SKILLS = [
-  { emoji: '🌾', label: 'Farming' },
-  { emoji: '🏗️', label: 'Construction' },
-  { emoji: '🚗', label: 'Driving' },
-  { emoji: '📦', label: 'Delivery' },
-  { emoji: '🌿', label: 'Gardening' },
-  { emoji: '🍳', label: 'Cooking' },
-  { emoji: '🧹', label: 'Cleaning' },
-  { emoji: '📱', label: 'Sales' },
-  { emoji: '🔧', label: 'Repairs' },
-  { emoji: '🐄', label: 'Livestock' },
-  { emoji: '🌲', label: 'Forestry' },
-  { emoji: '🧱', label: 'Masonry' },
-  { emoji: '💧', label: 'Irrigation' },
-  { emoji: '🎓', label: 'Teaching' },
-  { emoji: '🏥', label: 'Health Worker' },
+  { emoji: '🌾', label: 'Farming', labelKey: 'profileSetup.skills.farming' },
+  { emoji: '🏗️', label: 'Construction', labelKey: 'profileSetup.skills.construction' },
+  { emoji: '🚗', label: 'Driving', labelKey: 'profileSetup.skills.driving' },
+  { emoji: '📦', label: 'Delivery', labelKey: 'profileSetup.skills.delivery' },
+  { emoji: '🌿', label: 'Gardening', labelKey: 'profileSetup.skills.gardening' },
+  { emoji: '🍳', label: 'Cooking', labelKey: 'profileSetup.skills.cooking' },
+  { emoji: '🧹', label: 'Cleaning', labelKey: 'profileSetup.skills.cleaning' },
+  { emoji: '📱', label: 'Sales', labelKey: 'profileSetup.skills.sales' },
+  { emoji: '🔧', label: 'Repairs', labelKey: 'profileSetup.skills.repairs' },
+  { emoji: '🐄', label: 'Livestock', labelKey: 'profileSetup.skills.livestock' },
+  { emoji: '🌲', label: 'Forestry', labelKey: 'profileSetup.skills.forestry' },
+  { emoji: '🧱', label: 'Masonry', labelKey: 'profileSetup.skills.masonry' },
+  { emoji: '💧', label: 'Irrigation', labelKey: 'profileSetup.skills.irrigation' },
+  { emoji: '🎓', label: 'Teaching', labelKey: 'profileSetup.skills.teaching' },
+  { emoji: '🏥', label: 'Health Worker', labelKey: 'profileSetup.skills.health_worker' },
 ];
 
 const AVAILABILITY_OPTIONS = [
-  { id: 'immediately', emoji: '⚡', label: 'Immediately', desc: 'Can start right away' },
-  { id: 'this-week', emoji: '📆', label: 'This week', desc: 'Available within 7 days' },
-  { id: 'this-month', emoji: '🗓️', label: 'This month', desc: 'Available within 30 days' },
-  { id: 'flexible', emoji: '🤝', label: 'Flexible', desc: 'Open to discuss' },
+  { id: 'immediately', emoji: '⚡', label: 'Immediately', labelKey: 'profileSetup.availability.immediately', desc: 'Can start right away', descKey: 'profileSetup.availability.immediately_desc' },
+  { id: 'this-week', emoji: '📆', label: 'This week', labelKey: 'profileSetup.availability.this_week', desc: 'Available within 7 days', descKey: 'profileSetup.availability.this_week_desc' },
+  { id: 'this-month', emoji: '🗓️', label: 'This month', labelKey: 'profileSetup.availability.this_month', desc: 'Available within 30 days', descKey: 'profileSetup.availability.this_month_desc' },
+  { id: 'flexible', emoji: '🤝', label: 'Flexible', labelKey: 'profileSetup.availability.flexible', desc: 'Open to discuss', descKey: 'profileSetup.availability.flexible_desc' },
 ];
 
-const DAYS_OPTIONS = ['1-2 days', '3-4 days', '5-6 days', 'Full time'];
+const DAYS_OPTIONS = [
+  { id: '1-2 days', labelKey: 'profileSetup.days.1_2' },
+  { id: '3-4 days', labelKey: 'profileSetup.days.3_4' },
+  { id: '5-6 days', labelKey: 'profileSetup.days.5_6' },
+  { id: 'Full time', labelKey: 'profileSetup.days.full_time' },
+];
 
 interface ProfileDraft {
   firstName: string;
@@ -63,6 +69,7 @@ function loadDraft(): ProfileDraft {
 
 export default function SeekerProfileSetup() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const location = useLocation();
   const initialStep = (location.state as any)?.initialStep ?? 0;
   const [step, setStep] = useState(initialStep);
@@ -84,13 +91,6 @@ export default function SeekerProfileSetup() {
         : [...profile.skills, skill],
     });
 
-  const toggleLanguage = (lang: string) =>
-    update({
-      language: profile.language.includes(lang)
-        ? profile.language.filter((l) => l !== lang)
-        : [...profile.language, lang],
-    });
-
   const goNext = () => {
     setDirection(1);
     setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
@@ -106,13 +106,13 @@ export default function SeekerProfileSetup() {
       case 0: return profile.firstName.trim() && profile.lastName.trim() && profile.location.trim();
       case 1: return profile.skills.length > 0;
       case 2: return profile.availability && profile.daysPerWeek;
-      case 3: return profile.language.length > 0;
       default: return false;
     }
   })();
 
   const handleFinish = () => {
     if (!canProceed) return;
+    const appLang = localStorage.getItem('appLanguage') || 'en';
     localStorage.setItem(
       'seekerProfile',
       JSON.stringify({
@@ -122,7 +122,7 @@ export default function SeekerProfileSetup() {
         skills: profile.skills,
         availability: profile.availability,
         daysPerWeek: profile.daysPerWeek,
-        language: profile.language.length === 1 ? profile.language[0] : 'bilingual',
+        language: appLang === 'rw' ? 'kinyarwanda' : 'english',
       })
     );
     localStorage.removeItem(STORAGE_KEY);
@@ -147,13 +147,13 @@ export default function SeekerProfileSetup() {
           className="text-white mb-1"
           style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: '22px' }}
         >
-          Your Profile
+          {t('profileSetup.title')}
         </h1>
         <p
           className="text-white/70"
           style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '14px', fontStyle: 'italic' }}
         >
-          This replaces your CV — fill it once, use it forever
+          {t('profileSetup.subtitle')}
         </p>
       </div>
 
@@ -189,7 +189,6 @@ export default function SeekerProfileSetup() {
               {step === 0 && <Step1 profile={profile} update={update} />}
               {step === 1 && <Step2 profile={profile} toggleSkill={toggleSkill} />}
               {step === 2 && <Step3 profile={profile} update={update} />}
-              {step === 3 && <Step4 profile={profile} toggleLanguage={toggleLanguage} />}
             </div>
           </motion.div>
         </AnimatePresence>
@@ -234,7 +233,7 @@ export default function SeekerProfileSetup() {
             maxWidth: '448px',
           }}
         >
-          {step === TOTAL_STEPS - 1 ? 'Finish' : 'Next'}
+          {step === TOTAL_STEPS - 1 ? t('profileSetup.finish') : t('profileSetup.next')}
         </button>
       </div>
     </div>
@@ -305,29 +304,30 @@ function Step1({
   profile: ProfileDraft;
   update: (f: Partial<ProfileDraft>) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <>
-      <StepHeader emoji="👤" title="What is your name?" />
+      <StepHeader emoji="👤" title={t('profileSetup.step1_title')} />
       <div className="flex gap-3 mb-4">
         <div className="flex-1">
           <InputField
             value={profile.firstName}
             onChange={(v) => update({ firstName: v })}
-            placeholder="First name"
+            placeholder={t('profileSetup.first_name')}
           />
         </div>
         <div className="flex-1">
           <InputField
             value={profile.lastName}
             onChange={(v) => update({ lastName: v })}
-            placeholder="Last name"
+            placeholder={t('profileSetup.last_name')}
           />
         </div>
       </div>
       <InputField
         value={profile.location}
         onChange={(v) => update({ location: v })}
-        placeholder="Your sector or cell e.g. Musanze"
+        placeholder={t('profileSetup.location_placeholder')}
         prefix="📍"
       />
     </>
@@ -341,27 +341,28 @@ function Step2({
   profile: ProfileDraft;
   toggleSkill: (skill: string) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <>
       <StepHeader
         emoji="💪"
-        title="Select your skills"
-        subtitle="Choose all that apply — this is how employers find you"
+        title={t('profileSetup.step2_title')}
+        subtitle={t('profileSetup.step2_subtitle')}
       />
       <div className="flex flex-wrap gap-2">
-        {SKILLS.map(({ emoji, label }) => {
-          const selected = profile.skills.includes(label);
+        {SKILLS.map((skill) => {
+          const selected = profile.skills.includes(skill.label);
           return (
             <button
-              key={label}
-              onClick={() => toggleSkill(label)}
+              key={skill.label}
+              onClick={() => toggleSkill(skill.label)}
               className="flex items-center gap-1.5 px-4 py-2.5 rounded-full transition-all"
               style={{
                 backgroundColor: selected ? AppColors.greenBackground : AppColors.surfaceWhite,
                 border: `1.5px solid ${selected ? AppColors.forestGreen : AppColors.border}`,
               }}
             >
-              <span className="text-base">{emoji}</span>
+              <span className="text-base">{skill.emoji}</span>
               <span
                 style={{
                   fontFamily: 'DM Sans, sans-serif',
@@ -370,7 +371,7 @@ function Step2({
                   color: selected ? AppColors.forestGreen : AppColors.textDark,
                 }}
               >
-                {label}
+                {t(skill.labelKey)}
               </span>
             </button>
           );
@@ -387,13 +388,14 @@ function Step3({
   profile: ProfileDraft;
   update: (f: Partial<ProfileDraft>) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <>
-      <StepHeader emoji="📅" title="When can you work?" />
+      <StepHeader emoji="📅" title={t('profileSetup.step3_title')} />
 
       {/* Availability Grid */}
       <div className="grid grid-cols-2 gap-3 mb-6">
-        {AVAILABILITY_OPTIONS.map(({ id, emoji, label, desc }) => {
+        {AVAILABILITY_OPTIONS.map(({ id, emoji, labelKey, descKey }) => {
           const selected = profile.availability === id;
           return (
             <button
@@ -416,16 +418,16 @@ function Step3({
                   marginBottom: '2px',
                 }}
               >
-                {label}
+                {t(labelKey)}
               </div>
               <div
                 style={{
                   fontFamily: 'DM Sans, sans-serif',
-                  fontSize: '12px',
+                  fontSize: '13px',
                   color: AppColors.textMuted,
                 }}
               >
-                {desc}
+                {t(descKey)}
               </div>
             </button>
           );
@@ -437,15 +439,15 @@ function Step3({
         className="mb-3"
         style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600, fontSize: '14px', color: AppColors.textDark }}
       >
-        Days per week
+        {t('profileSetup.days_per_week')}
       </p>
       <div className="flex gap-2 overflow-x-auto pb-2">
         {DAYS_OPTIONS.map((option) => {
-          const selected = profile.daysPerWeek === option;
+          const selected = profile.daysPerWeek === option.id;
           return (
             <button
-              key={option}
-              onClick={() => update({ daysPerWeek: option })}
+              key={option.id}
+              onClick={() => update({ daysPerWeek: option.id })}
               className="flex-shrink-0 px-4 py-2.5 rounded-full transition-all"
               style={{
                 backgroundColor: selected ? AppColors.forestGreen : AppColors.surfaceWhite,
@@ -457,7 +459,7 @@ function Step3({
                 whiteSpace: 'nowrap',
               }}
             >
-              {option}
+              {t(option.labelKey)}
             </button>
           );
         })}
@@ -466,82 +468,3 @@ function Step3({
   );
 }
 
-function Step4({
-  profile,
-  toggleLanguage,
-}: {
-  profile: ProfileDraft;
-  toggleLanguage: (lang: string) => void;
-}) {
-  const both = profile.language.includes('english') && profile.language.includes('kinyarwanda');
-  return (
-    <>
-      <StepHeader
-        emoji="🗣️"
-        title="How should we write your applications?"
-        subtitle="Your AI assistant will write job applications in this language"
-      />
-      <div className="flex gap-3 mb-4">
-        {[
-          { id: 'english', flag: '🇬🇧', label: 'English', desc: 'Professional and widely understood' },
-          { id: 'kinyarwanda', flag: '🇷🇼', label: 'Kinyarwanda', desc: 'More personal and natural for local employers' },
-        ].map(({ id, flag, label, desc }) => {
-          const selected = profile.language.includes(id);
-          return (
-            <button
-              key={id}
-              onClick={() => toggleLanguage(id)}
-              className="flex-1 p-4 rounded-2xl text-center transition-all"
-              style={{
-                backgroundColor: AppColors.surfaceWhite,
-                border: `2px solid ${selected ? AppColors.forestGreen : AppColors.border}`,
-                boxShadow: selected ? '0 4px 12px rgba(26, 122, 74, 0.15)' : '0 2px 8px rgba(0, 0, 0, 0.04)',
-              }}
-            >
-              <div className="text-3xl mb-2">{flag}</div>
-              <div
-                style={{
-                  fontFamily: 'DM Sans, sans-serif',
-                  fontWeight: 600,
-                  fontSize: '15px',
-                  color: selected ? AppColors.forestGreen : AppColors.textDark,
-                  marginBottom: '4px',
-                }}
-              >
-                {label}
-              </div>
-              <div
-                style={{
-                  fontFamily: 'DM Sans, sans-serif',
-                  fontSize: '12px',
-                  color: AppColors.textMuted,
-                  lineHeight: '1.4',
-                }}
-              >
-                {desc}
-              </div>
-            </button>
-          );
-        })}
-      </div>
-
-      {both && (
-        <div
-          className="p-3 rounded-xl flex items-center gap-2"
-          style={{ backgroundColor: AppColors.greenBackground }}
-        >
-          <span className="text-lg">✨</span>
-          <p
-            style={{
-              fontFamily: 'DM Sans, sans-serif',
-              fontSize: '13px',
-              color: AppColors.forestGreen,
-            }}
-          >
-            We'll write in English with a Kinyarwanda greeting
-          </p>
-        </div>
-      )}
-    </>
-  );
-}

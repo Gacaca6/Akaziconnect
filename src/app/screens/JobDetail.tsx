@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import {
   ArrowLeft,
@@ -13,7 +14,14 @@ import {
 } from 'lucide-react';
 import type { Job } from '../constants/mockJobs';
 
+const getMatchLabel = (score: number, t: any): string => {
+  if (score >= 85) return t('swipeFeed.match_great');
+  if (score >= 70) return t('swipeFeed.match_good');
+  return t('swipeFeed.match_possible');
+};
+
 export default function JobDetail() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const job = (location.state as { job?: Job })?.job;
@@ -54,7 +62,7 @@ export default function JobDetail() {
   const infoPills = [
     { icon: MapPin, text: job.distance },
     { icon: Calendar, text: job.duration },
-    { icon: Users, text: `${job.workers} needed` },
+    { icon: Users, text: `${job.workers} ${t('swipeFeed.workers_needed')}` },
   ];
 
   // Derive some "skills required" from the job type & title for display
@@ -79,7 +87,7 @@ export default function JobDetail() {
       >
         <button
           onClick={() => navigate(-1)}
-          className="p-2 rounded-xl"
+          className="p-2.5 rounded-xl"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
         >
           <ArrowLeft className="w-6 h-6 text-white" />
@@ -88,7 +96,7 @@ export default function JobDetail() {
           className="flex-1 text-center text-xl text-white"
           style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700 }}
         >
-          Job Details
+          {t('jobDetail.title')}
         </h1>
         {/* Spacer to keep title centered */}
         <div className="w-10" />
@@ -139,7 +147,7 @@ export default function JobDetail() {
                 className="text-sm text-white"
                 style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700 }}
               >
-                {job.matchScore}% Match
+                {getMatchLabel(job.matchScore, t)}
               </span>
             </div>
           )}
@@ -210,7 +218,7 @@ export default function JobDetail() {
               className="text-sm mb-1"
               style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textMuted }}
             >
-              Pay Rate
+              {t('jobDetail.pay_rate')}
             </p>
             <p
               className="text-3xl"
@@ -229,7 +237,7 @@ export default function JobDetail() {
               className="text-lg mb-3"
               style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, color: AppColors.textDark }}
             >
-              About this job
+              {t('jobDetail.about_job')}
             </h3>
             <p
               className="text-sm leading-relaxed"
@@ -245,7 +253,7 @@ export default function JobDetail() {
               className="text-lg mb-3"
               style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, color: AppColors.textDark }}
             >
-              What you need
+              {t('jobDetail.what_you_need')}
             </h3>
             <div className="flex flex-wrap gap-2">
               {skillsRequired.map((skill) => (
@@ -280,10 +288,10 @@ export default function JobDetail() {
                 />
                 <div>
                   <p
-                    className="text-xs mb-1"
+                    className="text-[13px] mb-1"
                     style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600, color: AppColors.aiAmber }}
                   >
-                    AI Insight
+                    {t('jobDetail.ai_insight')}
                   </p>
                   <p
                     className="text-sm"
@@ -329,7 +337,7 @@ export default function JobDetail() {
               whiteSpace: 'nowrap',
             }}
           >
-            {saved ? 'Saved' : 'Save Job'}
+            {saved ? t('jobDetail.saved') : t('jobDetail.save_job')}
           </span>
         </button>
 
@@ -351,7 +359,7 @@ export default function JobDetail() {
               color: AppColors.surfaceWhite,
             }}
           >
-            Apply Now
+            {t('jobDetail.apply_now')}
           </span>
         </button>
       </div>

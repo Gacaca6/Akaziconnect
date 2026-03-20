@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft } from 'lucide-react';
 import { mockJobs } from '../constants/mockJobs';
@@ -89,6 +90,7 @@ const countMatchingJobs = (filters: ActiveFilters): number => {
 };
 
 export default function FilterSearch() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [filters, setFilters] = useState<ActiveFilters>(() => {
@@ -139,6 +141,21 @@ export default function FilterSearch() {
     navigate('/swipe-feed');
   };
 
+  const pillLabelMap: Record<string, string> = {
+    'Any': t('filterSearch.any'),
+    'Best Match': t('filterSearch.best_match'),
+    'Nearest': t('filterSearch.nearest'),
+    'Highest Pay': t('filterSearch.highest_pay'),
+    'Most Recent': t('filterSearch.most_recent'),
+    'Today': t('filterSearch.today'),
+    'This Week': t('filterSearch.this_week'),
+    'This Month': t('filterSearch.this_month'),
+    'Casual': t('postJob.job_types.casual'),
+    'Short-term': t('postJob.job_types.short_term'),
+    'Full-time': t('postJob.job_types.full_time'),
+    'Apprenticeship': t('postJob.job_types.apprenticeship'),
+  };
+
   const renderPillRow = (
     options: string[],
     selected: string,
@@ -151,7 +168,7 @@ export default function FilterSearch() {
           <button
             key={option}
             onClick={() => onSelect(option)}
-            className="px-4 py-2 rounded-full transition-all"
+            className="px-4 py-3 rounded-full transition-all"
             style={{
               backgroundColor: isActive ? AppColors.forestGreen : AppColors.surfaceWhite,
               color: isActive ? AppColors.surfaceWhite : AppColors.textDark,
@@ -161,7 +178,7 @@ export default function FilterSearch() {
               fontSize: '13px',
             }}
           >
-            {option}
+            {pillLabelMap[option] ?? option}
           </button>
         );
       })}
@@ -199,7 +216,7 @@ export default function FilterSearch() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => navigate(-1)}
-              className="w-9 h-9 rounded-xl flex items-center justify-center"
+              className="w-11 h-11 rounded-xl flex items-center justify-center"
               style={{ backgroundColor: AppColors.surfaceLight }}
             >
               <ArrowLeft className="w-5 h-5" style={{ color: AppColors.textDark }} />
@@ -212,7 +229,7 @@ export default function FilterSearch() {
                 color: AppColors.textDark,
               }}
             >
-              Filter Jobs
+              {t('filterSearch.title')}
             </h1>
           </div>
           <button
@@ -225,9 +242,10 @@ export default function FilterSearch() {
               background: 'none',
               border: 'none',
               cursor: 'pointer',
+              minHeight: '44px',
             }}
           >
-            Reset All
+            {t('filterSearch.reset_all')}
           </button>
         </div>
 
@@ -247,7 +265,7 @@ export default function FilterSearch() {
                   color: AppColors.textDark,
                 }}
               >
-                Job Type
+                {t('filterSearch.job_type')}
               </p>
               <div className="flex flex-wrap gap-2">
                 {jobTypeOptions.map(({ emoji, label }) => {
@@ -256,7 +274,7 @@ export default function FilterSearch() {
                     <button
                       key={label}
                       onClick={() => toggleJobType(label)}
-                      className="px-4 py-2.5 rounded-full flex items-center gap-2 transition-all"
+                      className="px-4 py-3 rounded-full flex items-center gap-2 transition-all"
                       style={{
                         backgroundColor: isActive ? AppColors.forestGreen : AppColors.surfaceWhite,
                         color: isActive ? AppColors.surfaceWhite : AppColors.textDark,
@@ -267,7 +285,7 @@ export default function FilterSearch() {
                       }}
                     >
                       <span>{emoji}</span>
-                      <span>{label}</span>
+                      <span>{pillLabelMap[label] ?? label}</span>
                     </button>
                   );
                 })}
@@ -284,7 +302,7 @@ export default function FilterSearch() {
                   color: AppColors.textDark,
                 }}
               >
-                Distance
+                {t('filterSearch.distance')}
               </p>
               {renderPillRow(distanceOptions, filters.distance, (val) =>
                 setFilters((prev) => ({ ...prev, distance: val }))
@@ -301,7 +319,7 @@ export default function FilterSearch() {
                   color: AppColors.textDark,
                 }}
               >
-                Minimum Pay
+                {t('filterSearch.pay_rate')}
               </p>
               {renderPillRow(payOptions, filters.minPay, (val) =>
                 setFilters((prev) => ({ ...prev, minPay: val }))
@@ -318,7 +336,7 @@ export default function FilterSearch() {
                   color: AppColors.textDark,
                 }}
               >
-                Availability
+                {t('filterSearch.availability')}
               </p>
               {renderPillRow(availabilityOptions, filters.availability, (val) =>
                 setFilters((prev) => ({ ...prev, availability: val }))
@@ -335,7 +353,7 @@ export default function FilterSearch() {
                   color: AppColors.textDark,
                 }}
               >
-                Sort By
+                {t('filterSearch.sort_by')}
               </p>
               {renderPillRow(sortOptions, filters.sortBy, (val) =>
                 setFilters((prev) => ({ ...prev, sortBy: val }))
@@ -369,7 +387,7 @@ export default function FilterSearch() {
               boxShadow: '0 4px 12px rgba(26,122,74,0.2)',
             }}
           >
-            Show {jobCount} Job{jobCount !== 1 ? 's' : ''}
+            {t('filterSearch.show_jobs', { count: jobCount })}
           </button>
         </div>
       </div>

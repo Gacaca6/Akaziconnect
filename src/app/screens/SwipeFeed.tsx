@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import {
   X,
@@ -88,11 +89,36 @@ const parseDistance = (dist: string): number => {
   return parseFloat(nums) || 999;
 };
 
+const getMatchLabel = (score: number, t: any): string => {
+  if (score >= 85) return t('swipeFeed.match_great');
+  if (score >= 70) return t('swipeFeed.match_good');
+  return t('swipeFeed.match_possible');
+};
+
 const SWIPE_THRESHOLD = 100;
 
 export default function SwipeFeed() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Success banner after applying
+  const [successBanner, setSuccessBanner] = useState<string | null>(() => {
+    const state = location.state as { applied?: boolean; employerName?: string } | null;
+    if (state?.applied) {
+      window.history.replaceState({}, '');
+      return state.employerName || 'the employer';
+    }
+    return null;
+  });
+
+  useEffect(() => {
+    if (successBanner) {
+      const timer = setTimeout(() => setSuccessBanner(null), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [successBanner]);
 
   // Load all jobs then apply filters
   const [allJobs] = useState(() => {
@@ -262,18 +288,18 @@ export default function SwipeFeed() {
                 className="text-2xl text-white"
                 style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700 }}
               >
-                Jobs Near You
+                {t('swipeFeed.title')}
               </h1>
               <p
                 className="text-sm text-white/70 mt-1"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
-                0 opportunities available
+                0 {t('swipeFeed.opportunities')}
               </p>
             </div>
             <button
               onClick={() => navigate('/filter-search')}
-              className="w-10 h-10 rounded-xl flex items-center justify-center relative"
+              className="w-11 h-11 rounded-xl flex items-center justify-center relative"
               style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
             >
               <SlidersHorizontal className="w-5 h-5 text-white" />
@@ -292,7 +318,7 @@ export default function SwipeFeed() {
                 color: AppColors.textDark,
               }}
             >
-              {hasFilters ? 'No jobs match your filters' : 'All Caught Up!'}
+              {hasFilters ? t('swipeFeed.no_jobs_title') : t('swipeFeed.no_jobs_title')}
             </h2>
             <p
               className="mb-6"
@@ -301,9 +327,7 @@ export default function SwipeFeed() {
                 color: AppColors.textMuted,
               }}
             >
-              {hasFilters
-                ? 'Try adjusting your filters or search to find more opportunities.'
-                : "You've seen all available jobs. Check back soon for new opportunities!"}
+              {t('swipeFeed.no_jobs_subtitle')}
             </p>
             {hasFilters && (
               <button
@@ -319,7 +343,7 @@ export default function SwipeFeed() {
                   boxShadow: '0 4px 12px rgba(26,122,74,0.2)',
                 }}
               >
-                Clear Filters
+                {t('swipeFeed.clear_filters')}
               </button>
             )}
           </div>
@@ -342,19 +366,19 @@ export default function SwipeFeed() {
               className="text-2xl text-white"
               style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700 }}
             >
-              Jobs Near You
+              {t('swipeFeed.title')}
             </h1>
             <p
               className="text-sm text-white/70 mt-1"
               style={{ fontFamily: 'DM Sans, sans-serif' }}
             >
-              {jobs.length - currentIndex} opportunities available
+              {jobs.length - currentIndex} {t('swipeFeed.opportunities')}
             </p>
           </div>
           {/* Filter button with badge */}
           <button
             onClick={() => navigate('/filter-search')}
-            className="w-10 h-10 rounded-xl flex items-center justify-center relative"
+            className="w-11 h-11 rounded-xl flex items-center justify-center relative"
             style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
           >
             <SlidersHorizontal className="w-5 h-5 text-white" />
@@ -368,7 +392,7 @@ export default function SwipeFeed() {
                 <span
                   className="text-white"
                   style={{
-                    fontSize: '11px',
+                    fontSize: '13px',
                     fontFamily: 'Space Grotesk, sans-serif',
                     fontWeight: 700,
                   }}
@@ -382,13 +406,13 @@ export default function SwipeFeed() {
 
         {/* Search bar */}
         <div
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full"
+          className="flex items-center gap-2 px-4 py-3 rounded-full"
           style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
         >
           <Search className="w-4 h-4 text-white/60 flex-shrink-0" />
           <input
             type="text"
-            placeholder="Search jobs..."
+            placeholder={t('swipeFeed.search_placeholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="flex-1 bg-transparent outline-none text-white placeholder-white/50"
@@ -409,6 +433,27 @@ export default function SwipeFeed() {
           )}
         </div>
       </div>
+
+      {/* Success Banner */}
+      <AnimatePresence>
+        {successBanner && (
+          <motion.div
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -20, opacity: 0 }}
+            className="mx-5 mt-3 p-3 rounded-2xl flex items-center gap-3"
+            style={{ backgroundColor: AppColors.greenBackground }}
+          >
+            <span className="text-xl">🎉</span>
+            <p
+              className="text-sm"
+              style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.forestGreen, fontWeight: 600 }}
+            >
+              {t('swipeFeed.application_sent_banner', { employer: successBanner })}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Card Stack */}
       <div className="flex-1 px-5 py-8 relative">
@@ -466,7 +511,7 @@ export default function SwipeFeed() {
                             color: dragX > 0 ? AppColors.greenLight : AppColors.skipRed,
                           }}
                         >
-                          {dragX > 0 ? 'APPLY' : 'SKIP'}
+                          {dragX > 0 ? t('swipeFeed.apply').toUpperCase() : t('swipeFeed.skip').toUpperCase()}
                         </span>
                       </div>
                     </div>
@@ -505,14 +550,14 @@ export default function SwipeFeed() {
                             className="text-sm text-white"
                             style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700 }}
                           >
-                            {currentJob.matchScore}% Match
+                            {getMatchLabel(currentJob.matchScore, t)}
                           </span>
                         </div>
                       )}
                       {/* Type Badge */}
                       <div className="absolute bottom-3 left-3">
                         <span
-                          className="px-3 py-1 rounded-full text-xs"
+                          className="px-3 py-1 rounded-full text-[13px]"
                           style={{
                             backgroundColor: AppColors.forestGreen,
                             color: AppColors.surfaceWhite,
@@ -559,28 +604,28 @@ export default function SwipeFeed() {
                         <div className="flex items-center gap-2 p-3 rounded-xl" style={{ backgroundColor: AppColors.greenBackground }}>
                           <MapPin className="w-4 h-4 flex-shrink-0" style={{ color: AppColors.forestGreen }} />
                           <div>
-                            <p className="text-xs" style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textMuted }}>Location</p>
+                            <p className="text-[13px]" style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textMuted }}>{t('swipeFeed.location')}</p>
                             <p className="text-sm" style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600, color: AppColors.textDark }}>{currentJob.distance}</p>
                           </div>
                         </div>
                         <div className="flex items-center gap-2 p-3 rounded-xl" style={{ backgroundColor: AppColors.greenBackground }}>
                           <Calendar className="w-4 h-4 flex-shrink-0" style={{ color: AppColors.forestGreen }} />
                           <div>
-                            <p className="text-xs" style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textMuted }}>Duration</p>
+                            <p className="text-[13px]" style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textMuted }}>{t('swipeFeed.duration')}</p>
                             <p className="text-sm" style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600, color: AppColors.textDark }}>{currentJob.duration}</p>
                           </div>
                         </div>
                         <div className="flex items-center gap-2 p-3 rounded-xl" style={{ backgroundColor: AppColors.greenBackground }}>
                           <Users className="w-4 h-4 flex-shrink-0" style={{ color: AppColors.forestGreen }} />
                           <div>
-                            <p className="text-xs" style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textMuted }}>Workers</p>
-                            <p className="text-sm" style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600, color: AppColors.textDark }}>{currentJob.workers} needed</p>
+                            <p className="text-[13px]" style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textMuted }}>{t('swipeFeed.workers')}</p>
+                            <p className="text-sm" style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600, color: AppColors.textDark }}>{currentJob.workers} {t('swipeFeed.workers_needed')}</p>
                           </div>
                         </div>
                         <div className="flex items-center gap-2 p-3 rounded-xl" style={{ backgroundColor: AppColors.greenBackground }}>
                           <Zap className="w-4 h-4 flex-shrink-0" style={{ color: AppColors.forestGreen }} />
                           <div>
-                            <p className="text-xs" style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textMuted }}>Pay Rate</p>
+                            <p className="text-[13px]" style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textMuted }}>{t('swipeFeed.pay_rate')}</p>
                             <p className="text-sm" style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, color: AppColors.forestGreen }}>{currentJob.payRate}</p>
                           </div>
                         </div>
@@ -596,7 +641,7 @@ export default function SwipeFeed() {
                         className="text-sm mb-2"
                         style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600, color: AppColors.textDark }}
                       >
-                        About this job
+                        {t('swipeFeed.about_job')}
                       </p>
                       <p
                         className="text-sm leading-relaxed"

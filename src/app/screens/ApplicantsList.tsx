@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft } from 'lucide-react';
 
@@ -45,6 +46,7 @@ const hoursAgo = (dateStr: string): number => {
 export default function ApplicantsList() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
   const job = (location.state as any)?.job;
 
   const [applicants, setApplicants] = useState<Conversation[]>([]);
@@ -113,7 +115,7 @@ export default function ApplicantsList() {
         <div className="flex items-center gap-4 mb-1">
           <button
             onClick={() => navigate(-1)}
-            className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+            className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
             style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
           >
             <ArrowLeft className="w-5 h-5 text-white" />
@@ -123,7 +125,7 @@ export default function ApplicantsList() {
               className="text-lg text-white"
               style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700 }}
             >
-              Applicants
+              {t('applicantsList.title')}
             </h1>
             <p
               className="text-sm text-white/70 mt-0.5"
@@ -147,14 +149,14 @@ export default function ApplicantsList() {
           className="text-sm"
           style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 500, color: AppColors.textDark }}
         >
-          👥 {applicants.length} total applicant{applicants.length !== 1 ? 's' : ''}
+          👥 {applicants.length} {t('applicantsList.total_applicants')}
         </span>
         {applicants.length > 0 && (
           <span
             className="text-sm"
             style={{ fontFamily: 'DM Sans, sans-serif', color: AppColors.textMuted }}
           >
-            🕐 Latest {latestHours < 1 ? 'just now' : `${latestHours}h ago`}
+            🕐 {t('applicantsList.latest')} {latestHours < 1 ? 'just now' : `${latestHours}h ago`}
           </span>
         )}
       </div>
@@ -172,7 +174,7 @@ export default function ApplicantsList() {
                 color: AppColors.textDark,
               }}
             >
-              No applicants yet
+              {t('applicantsList.empty_title')}
             </h2>
             <p
               style={{
@@ -181,7 +183,7 @@ export default function ApplicantsList() {
                 lineHeight: 1.6,
               }}
             >
-              Share your job to attract workers
+              {t('applicantsList.empty_subtitle')}
             </p>
           </div>
         </div>
@@ -246,7 +248,7 @@ export default function ApplicantsList() {
                             />
                           )}
                           <span
-                            className="text-xs"
+                            className="text-[13px]"
                             style={{
                               fontFamily: 'DM Sans, sans-serif',
                               color: AppColors.textMuted,
@@ -286,7 +288,7 @@ export default function ApplicantsList() {
                         cursor: 'pointer',
                       }}
                     >
-                      View Profile
+                      {t('applicantsList.view_profile')}
                     </button>
                     <button
                       onClick={() => navigate('/employer-message-thread', { state: { conversation: conv } })}
@@ -302,7 +304,7 @@ export default function ApplicantsList() {
                         boxShadow: '0 4px 12px rgba(26,122,74,0.2)',
                       }}
                     >
-                      Message
+                      {t('applicantsList.message')}
                     </button>
                   </div>
                 </div>

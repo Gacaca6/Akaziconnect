@@ -1,38 +1,25 @@
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { useSwipeable } from 'react-swipeable';
 import { motion, AnimatePresence } from 'motion/react';
 
 const SLIDES = [
-  {
-    emoji: '🤝',
-    title: 'Find Work Near You',
-    subtitle:
-      'Discover jobs in your area — farming, construction, delivery and more. No CV needed.',
-  },
-  {
-    emoji: '👆',
-    title: 'Swipe to Apply',
-    subtitle:
-      'Swipe right on jobs you like. Our AI instantly writes your application for you — in English or Kinyarwanda.',
-  },
-  {
-    emoji: '⚡',
-    title: 'Get Hired Fast',
-    subtitle:
-      'Employers in your area see your profile and reach out directly. Start working within days.',
-  },
+  { emoji: '🤝', titleKey: 'onboarding.slide1_title', subtitleKey: 'onboarding.slide1_subtitle' },
+  { emoji: '👆', titleKey: 'onboarding.slide2_title', subtitleKey: 'onboarding.slide2_subtitle' },
+  { emoji: '⚡', titleKey: 'onboarding.slide3_title', subtitleKey: 'onboarding.slide3_subtitle' },
 ];
 
 export default function OnboardingCarousel() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
 
   const finish = useCallback(() => {
     localStorage.setItem('onboardingComplete', 'true');
-    navigate('/role-selection');
+    navigate('/language-selection');
   }, [navigate]);
 
   const goTo = useCallback(
@@ -91,7 +78,7 @@ export default function OnboardingCarousel() {
     >
       {/* Skip button — top right */}
       <div className="flex justify-end px-5 pt-5 flex-shrink-0">
-        <button onClick={finish} className="px-4 py-2 rounded-full">
+        <button onClick={finish} className="px-4 py-2.5 rounded-full">
           <span
             style={{
               fontFamily: 'DM Sans, sans-serif',
@@ -100,7 +87,7 @@ export default function OnboardingCarousel() {
               color: 'rgba(255, 255, 255, 0.6)',
             }}
           >
-            Skip
+            {t('onboarding.skip')}
           </span>
         </button>
       </div>
@@ -132,7 +119,7 @@ export default function OnboardingCarousel() {
                   lineHeight: '1.2',
                 }}
               >
-                {slide.title}
+                {t(slide.titleKey)}
               </h1>
               <p
                 className="text-white/70"
@@ -142,7 +129,7 @@ export default function OnboardingCarousel() {
                   lineHeight: '1.6',
                 }}
               >
-                {slide.subtitle}
+                {t(slide.subtitleKey)}
               </p>
             </div>
           </motion.div>
@@ -182,7 +169,7 @@ export default function OnboardingCarousel() {
             boxShadow: '0 4px 12px rgba(26, 122, 74, 0.3)',
           }}
         >
-          {current === SLIDES.length - 1 ? 'Get Started' : 'Next'}
+          {current === SLIDES.length - 1 ? t('onboarding.get_started') : t('onboarding.next')}
         </button>
       </div>
     </div>

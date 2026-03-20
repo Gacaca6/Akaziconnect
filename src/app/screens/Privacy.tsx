@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft } from 'lucide-react';
 
@@ -27,6 +28,7 @@ const sections = [
 
 export default function Privacy() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleDeleteAccount = () => {
     navigate('/sign-out');
@@ -44,7 +46,7 @@ export default function Privacy() {
       >
         <button
           onClick={() => navigate(-1)}
-          className="p-2 rounded-xl"
+          className="p-2.5 rounded-xl"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
         >
           <ArrowLeft className="w-6 h-6 text-white" />
@@ -57,7 +59,7 @@ export default function Privacy() {
             fontSize: '18px',
           }}
         >
-          Privacy & Security
+          {t('privacy.title')}
         </h1>
       </div>
 
@@ -116,7 +118,7 @@ export default function Privacy() {
               color: AppColors.skipRed,
             }}
           >
-            Delete Account
+            {t('privacy.delete_account')}
           </button>
         </div>
       </div>

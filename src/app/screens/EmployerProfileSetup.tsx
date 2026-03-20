@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -9,19 +10,19 @@ const TOTAL_STEPS = 3;
 const STORAGE_KEY = 'employerProfileDraft';
 
 const EMPLOYER_TYPES = [
-  { emoji: '🌾', label: 'Farm / Agriculture' },
-  { emoji: '🏗️', label: 'Construction' },
-  { emoji: '🏪', label: 'Small Business' },
-  { emoji: '🤝', label: 'NGO / Charity' },
-  { emoji: '🏘️', label: 'Cooperative' },
-  { emoji: '👤', label: 'Individual' },
+  { emoji: '🌾', id: 'Farm / Agriculture', labelKey: 'employerSetup.employer_types.farm' },
+  { emoji: '🏗️', id: 'Construction', labelKey: 'employerSetup.employer_types.construction' },
+  { emoji: '🏪', id: 'Small Business', labelKey: 'employerSetup.employer_types.small_business' },
+  { emoji: '🤝', id: 'NGO / Charity', labelKey: 'employerSetup.employer_types.ngo' },
+  { emoji: '🏘️', id: 'Cooperative', labelKey: 'employerSetup.employer_types.cooperative' },
+  { emoji: '👤', id: 'Individual', labelKey: 'employerSetup.employer_types.individual' },
 ];
 
 const JOB_TYPES = [
-  { emoji: '⏱️', label: 'Casual (daily)' },
-  { emoji: '📅', label: 'Short-term (weeks)' },
-  { emoji: '🗓️', label: 'Long-term (months)' },
-  { emoji: '🎓', label: 'Apprentice' },
+  { emoji: '⏱️', id: 'Casual (daily)', labelKey: 'employerSetup.job_types.casual' },
+  { emoji: '📅', id: 'Short-term (weeks)', labelKey: 'employerSetup.job_types.short_term' },
+  { emoji: '🗓️', id: 'Long-term (months)', labelKey: 'employerSetup.job_types.long_term' },
+  { emoji: '🎓', id: 'Apprentice', labelKey: 'employerSetup.job_types.apprentice' },
 ];
 
 const WORKER_COUNTS = ['1-2', '3-5', '6-10', '10-20', '20+'];
@@ -54,6 +55,7 @@ function loadDraft(): EmployerDraft {
 
 export default function EmployerProfileSetup() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
   const [profile, setProfile] = useState<EmployerDraft>(loadDraft);
@@ -128,13 +130,13 @@ export default function EmployerProfileSetup() {
           className="text-white mb-1"
           style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: '22px' }}
         >
-          Employer Profile
+          {t('employerSetup.title')}
         </h1>
         <p
           className="text-white/70"
           style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '14px', fontStyle: 'italic' }}
         >
-          Set up once — start hiring today
+          {t('employerSetup.subtitle')}
         </p>
       </div>
 
@@ -214,7 +216,7 @@ export default function EmployerProfileSetup() {
             maxWidth: '448px',
           }}
         >
-          {step === TOTAL_STEPS - 1 ? 'Finish' : 'Next'}
+          {step === TOTAL_STEPS - 1 ? t('employerSetup.finish') : t('employerSetup.next')}
         </button>
       </div>
     </div>
@@ -285,16 +287,17 @@ function Step1({
   profile: EmployerDraft;
   update: (f: Partial<EmployerDraft>) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <>
-      <StepHeader emoji="🏢" title="Tell us about your organisation" />
+      <StepHeader emoji="🏢" title={t('employerSetup.step1_title')} />
 
       {/* Org Name */}
       <div className="mb-4">
         <InputField
           value={profile.orgName}
           onChange={(v) => update({ orgName: v })}
-          placeholder="e.g. Musanze Tea Cooperative"
+          placeholder={t('employerSetup.org_name_placeholder')}
         />
       </div>
 
@@ -303,15 +306,15 @@ function Step1({
         className="mb-3"
         style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600, fontSize: '14px', color: AppColors.textDark }}
       >
-        Type of employer
+        {t('employerSetup.employer_type_label')}
       </p>
       <div className="flex flex-wrap gap-2 mb-4">
-        {EMPLOYER_TYPES.map(({ emoji, label }) => {
-          const selected = profile.employerType === label;
+        {EMPLOYER_TYPES.map(({ emoji, id, labelKey }) => {
+          const selected = profile.employerType === id;
           return (
             <button
-              key={label}
-              onClick={() => update({ employerType: label })}
+              key={id}
+              onClick={() => update({ employerType: id })}
               className="flex items-center gap-1.5 px-4 py-2.5 rounded-full transition-all"
               style={{
                 backgroundColor: selected ? AppColors.greenBackground : AppColors.surfaceWhite,
@@ -327,7 +330,7 @@ function Step1({
                   color: selected ? AppColors.forestGreen : AppColors.textDark,
                 }}
               >
-                {label}
+                {t(labelKey)}
               </span>
             </button>
           );
@@ -338,7 +341,7 @@ function Step1({
       <InputField
         value={profile.location}
         onChange={(v) => update({ location: v })}
-        placeholder="Your sector or cell"
+        placeholder={t('employerSetup.location_placeholder')}
         prefix="📍"
       />
     </>
@@ -356,15 +359,16 @@ function Step2({
   toggleContact: (v: string) => void;
   update: (f: Partial<EmployerDraft>) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <>
-      <StepHeader emoji="📞" title="How can workers reach you?" />
+      <StepHeader emoji="📞" title={t('employerSetup.step2_title')} />
 
       {/* Contact Method Cards */}
       <div className="flex gap-3 mb-6">
         {[
-          { id: 'phone', emoji: '📱', label: 'Phone Call', desc: 'Workers call you directly' },
-          { id: 'in-app', emoji: '💬', label: 'In-App Message', desc: 'Chat through Akazi Connect' },
+          { id: 'phone', emoji: '📱', label: t('employerSetup.contact_phone'), desc: t('employerSetup.contact_phone_desc') },
+          { id: 'in-app', emoji: '💬', label: t('employerSetup.contact_message'), desc: t('employerSetup.contact_message_desc') },
         ].map(({ id, emoji, label, desc }) => {
           const selected = profile.contactMethods.includes(id);
           return (
@@ -393,7 +397,7 @@ function Step2({
               <div
                 style={{
                   fontFamily: 'DM Sans, sans-serif',
-                  fontSize: '12px',
+                  fontSize: '13px',
                   color: AppColors.textMuted,
                   lineHeight: '1.4',
                 }}
@@ -410,13 +414,13 @@ function Step2({
         className="mb-2"
         style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 500, fontSize: '14px', color: AppColors.textDark }}
       >
-        WhatsApp number (optional)
+        {t('employerSetup.whatsapp_label')}
       </p>
       <div className="mb-6">
         <InputField
           value={profile.whatsapp}
           onChange={(v) => update({ whatsapp: v })}
-          placeholder="WhatsApp number (optional)"
+          placeholder={t('employerSetup.whatsapp_label')}
           prefix="💬"
         />
       </div>
@@ -438,7 +442,7 @@ function Step2({
                 marginBottom: '8px',
               }}
             >
-              Verified employers get 3x more applicants — verification is free and takes 24 hours
+              {t('employerSetup.verification_text')}
             </p>
             <button
               style={{
@@ -452,7 +456,7 @@ function Step2({
                 color: AppColors.forestGreen,
               }}
             >
-              Request Verification
+              {t('employerSetup.request_verification')}
             </button>
           </div>
         </div>
@@ -472,24 +476,25 @@ function Step3({
   toggleJobType: (v: string) => void;
   update: (f: Partial<EmployerDraft>) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <>
-      <StepHeader emoji="👥" title="What kind of workers do you need?" />
+      <StepHeader emoji="👥" title={t('employerSetup.step3_title')} />
 
       {/* Job Type Chips */}
       <p
         className="mb-3"
         style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600, fontSize: '14px', color: AppColors.textDark }}
       >
-        Types of work you hire for
+        {t('employerSetup.work_types_label')}
       </p>
       <div className="flex flex-wrap gap-2 mb-6">
-        {JOB_TYPES.map(({ emoji, label }) => {
-          const selected = profile.jobTypes.includes(label);
+        {JOB_TYPES.map(({ emoji, id, labelKey }) => {
+          const selected = profile.jobTypes.includes(id);
           return (
             <button
-              key={label}
-              onClick={() => toggleJobType(label)}
+              key={id}
+              onClick={() => toggleJobType(id)}
               className="flex items-center gap-1.5 px-4 py-2.5 rounded-full transition-all"
               style={{
                 backgroundColor: selected ? AppColors.greenBackground : AppColors.surfaceWhite,
@@ -505,7 +510,7 @@ function Step3({
                   color: selected ? AppColors.forestGreen : AppColors.textDark,
                 }}
               >
-                {label}
+                {t(labelKey)}
               </span>
             </button>
           );
@@ -517,7 +522,7 @@ function Step3({
         className="mb-3"
         style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600, fontSize: '14px', color: AppColors.textDark }}
       >
-        How many workers do you typically need?
+        {t('employerSetup.workers_needed_label')}
       </p>
       <div className="flex gap-2 overflow-x-auto pb-2">
         {WORKER_COUNTS.map((count) => {

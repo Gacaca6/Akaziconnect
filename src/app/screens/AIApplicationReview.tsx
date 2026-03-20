@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import {
   ArrowLeft,
@@ -19,6 +20,7 @@ let applicationFetchInProgress = false;
 
 export default function AIApplicationReview() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { jobId } = useParams();
 
   const [applicationText, setApplicationText] = useState('');
@@ -197,7 +199,7 @@ export default function AIApplicationReview() {
       >
         <button
           onClick={() => navigate(-1)}
-          className="p-2 rounded-xl"
+          className="p-2.5 rounded-xl"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
         >
           <ArrowLeft className="w-6 h-6 text-white" />
@@ -207,7 +209,7 @@ export default function AIApplicationReview() {
             className="text-xl text-white"
             style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700 }}
           >
-            Review Application
+            {t('aiReview.title')}
           </h1>
         </div>
       </div>
@@ -344,10 +346,10 @@ export default function AIApplicationReview() {
                   color: AppColors.textDark
                 }}
               >
-                Your Application
+                {t('aiReview.title')}
               </h3>
               <span
-                className="px-2 py-0.5 rounded-full text-xs ml-auto"
+                className="px-2 py-0.5 rounded-full text-[13px] ml-auto"
                 style={{
                   backgroundColor: `${AppColors.aiAmber}20`,
                   color: AppColors.aiAmber,
@@ -382,13 +384,13 @@ export default function AIApplicationReview() {
                 <div className="pt-2 flex items-center gap-2">
                   <Sparkles className="w-4 h-4 animate-pulse" style={{ color: AppColors.aiAmber }} />
                   <span
-                    className="text-xs animate-pulse"
+                    className="text-[13px] animate-pulse"
                     style={{
                       fontFamily: 'DM Sans, sans-serif',
                       color: AppColors.aiAmber,
                     }}
                   >
-                    AI is writing your application...
+                    {t('aiReview.ai_writing')}
                   </span>
                 </div>
               </div>
@@ -408,13 +410,13 @@ export default function AIApplicationReview() {
             )}
 
             <p
-              className="text-xs mt-2"
+              className="text-[13px] mt-2"
               style={{
                 fontFamily: 'DM Sans, sans-serif',
                 color: AppColors.textMuted
               }}
             >
-              You can edit this message before sending
+              {t('aiReview.subtitle')}
             </p>
           </div>
 
@@ -503,7 +505,7 @@ export default function AIApplicationReview() {
           }}
         >
           <Sparkles className="w-5 h-5" />
-          {isLoading ? 'Generating...' : 'Send Application'}
+          {isLoading ? t('aiReview.generating') : t('aiReview.send')}
         </button>
       </div>
     </div>

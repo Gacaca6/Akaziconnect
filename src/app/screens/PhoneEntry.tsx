@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft } from 'lucide-react';
 import logo from '../../assets/logo.png';
 
 export default function PhoneEntry() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const location = useLocation();
   const role = (location.state as { role?: string })?.role || 'seeker';
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -31,7 +33,7 @@ export default function PhoneEntry() {
       >
         <button
           onClick={() => navigate(-1)}
-          className="p-2 rounded-xl"
+          className="p-2.5 rounded-xl"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
         >
           <ArrowLeft className="w-6 h-6 text-white" />
@@ -51,7 +53,7 @@ export default function PhoneEntry() {
               color: AppColors.textDark,
             }}
           >
-            Enter your number
+            {t('phoneEntry.title')}
           </h2>
           <p
             className="mb-8"
@@ -60,7 +62,7 @@ export default function PhoneEntry() {
               color: AppColors.textMuted,
             }}
           >
-            We'll send you a verification code
+            {t('phoneEntry.subtitle')}
           </p>
 
           {/* Phone Input Row */}
@@ -116,7 +118,7 @@ export default function PhoneEntry() {
               cursor: isValid ? 'pointer' : 'not-allowed',
             }}
           >
-            Continue
+            {t('phoneEntry.continue')}
           </button>
 
           {/* Reassurance Text */}
@@ -128,7 +130,7 @@ export default function PhoneEntry() {
               color: AppColors.textMuted,
             }}
           >
-            Your number is only used for login
+            {t('phoneEntry.reassurance')}
           </p>
         </div>
       </div>

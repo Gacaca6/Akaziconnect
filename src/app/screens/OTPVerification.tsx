@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft } from 'lucide-react';
 import logo from '../../assets/logo.png';
@@ -9,6 +10,7 @@ const COOLDOWN_SECONDS = 30;
 
 export default function OTPVerification() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const location = useLocation();
   const phone = (location.state as { phone?: string; role?: string })?.phone || '+250 ---';
   const role = (location.state as { role?: string })?.role || 'seeker';
@@ -95,7 +97,7 @@ export default function OTPVerification() {
       >
         <button
           onClick={() => navigate(-1)}
-          className="p-2 rounded-xl"
+          className="p-2.5 rounded-xl"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
         >
           <ArrowLeft className="w-6 h-6 text-white" />
@@ -115,7 +117,7 @@ export default function OTPVerification() {
               color: AppColors.textDark,
             }}
           >
-            Verify your number
+            {t('otp.title')}
           </h2>
           <p
             className="mb-8"
@@ -124,7 +126,7 @@ export default function OTPVerification() {
               color: AppColors.textMuted,
             }}
           >
-            Code sent to <span style={{ color: AppColors.textDark, fontWeight: 500 }}>{phone}</span>
+            {t('otp.subtitle', { phone })}
           </p>
 
           {/* OTP Input Boxes */}
@@ -140,7 +142,7 @@ export default function OTPVerification() {
                 onChange={(e) => handleChange(i, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(i, e)}
                 onPaste={i === 0 ? handlePaste : undefined}
-                className="w-12 h-14 text-center rounded-xl focus:outline-none focus:ring-2"
+                className="flex-1 min-w-0 h-14 text-center rounded-xl focus:outline-none focus:ring-2"
                 style={{
                   fontFamily: 'Space Grotesk, sans-serif',
                   fontWeight: 700,
@@ -162,9 +164,9 @@ export default function OTPVerification() {
               color: AppColors.textMuted,
             }}
           >
-            Didn't receive a code?{' '}
+            {t('otp.didnt_receive')}{' '}
             {cooldown > 0 ? (
-              <span style={{ color: AppColors.textMuted }}>Resend in {cooldown}s</span>
+              <span style={{ color: AppColors.textMuted }}>{t('otp.resend_wait')} {cooldown}s</span>
             ) : (
               <button
                 onClick={handleResend}
@@ -179,7 +181,7 @@ export default function OTPVerification() {
                   color: AppColors.forestGreen,
                 }}
               >
-                Resend
+                {t('otp.resend')}
               </button>
             )}
           </p>
@@ -198,7 +200,7 @@ export default function OTPVerification() {
               cursor: isComplete ? 'pointer' : 'not-allowed',
             }}
           >
-            Verify
+            {t('otp.verify')}
           </button>
         </div>
       </div>

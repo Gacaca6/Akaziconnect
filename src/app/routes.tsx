@@ -15,6 +15,7 @@ import JobDetail from "./screens/JobDetail";
 import ApplicationSent from "./screens/ApplicationSent";
 import PostJob from "./screens/PostJob";
 import OnboardingCarousel from "./screens/OnboardingCarousel";
+import LanguageSelection from "./screens/LanguageSelection";
 import MyListings from "./screens/MyListings";
 import EmployerProfile from "./screens/EmployerProfile";
 import EmployerMessages from "./screens/EmployerMessages";
@@ -80,6 +81,11 @@ export const router = createBrowserRouter([
   {
     path: "/onboarding",
     Component: OnboardingCarousel,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "/language-selection",
+    Component: LanguageSelection,
     errorElement: <ErrorBoundary />,
   },
   {

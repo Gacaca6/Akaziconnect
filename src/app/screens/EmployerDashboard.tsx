@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import {
   Plus,
@@ -49,6 +50,7 @@ function loadOrgName(): string {
 }
 
 export default function EmployerDashboard() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const stats = loadStats();
   const recentJobs = loadRecentJobs();
@@ -80,12 +82,12 @@ export default function EmployerDashboard() {
                 className="text-sm text-white/70"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
-                Employer Dashboard
+                {t('employerDashboard.title')}
               </p>
             </div>
             <button
               onClick={() => navigate('/post-job')}
-              className="flex items-center gap-2 px-4 py-3 rounded-2xl transition-transform active:scale-95"
+              className="flex items-center gap-2 px-4 py-3.5 rounded-2xl transition-transform active:scale-95"
               style={{ backgroundColor: AppColors.greenLight }}
             >
               <Plus className="w-5 h-5 text-white" strokeWidth={2.5} />
@@ -96,7 +98,7 @@ export default function EmployerDashboard() {
                   fontWeight: 600,
                 }}
               >
-                Post Job
+                {t('employerDashboard.post_job')}
               </span>
             </button>
           </div>
@@ -120,10 +122,10 @@ export default function EmployerDashboard() {
                 {stats.total}
               </div>
               <p
-                className="text-xs text-white/70"
+                className="text-[13px] text-white/70"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
-                Total Listings
+                {t('employerDashboard.total_listings')}
               </p>
             </div>
 
@@ -144,10 +146,10 @@ export default function EmployerDashboard() {
                 {stats.active}
               </div>
               <p
-                className="text-xs text-white/70"
+                className="text-[13px] text-white/70"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
-                Active Jobs
+                {t('employerDashboard.active_jobs')}
               </p>
             </div>
 
@@ -168,10 +170,10 @@ export default function EmployerDashboard() {
                 {stats.applicants}
               </div>
               <p
-                className="text-xs text-white/70"
+                className="text-[13px] text-white/70"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
-                Applicants
+                {t('employerDashboard.total_applicants')}
               </p>
             </div>
           </div>
@@ -203,11 +205,12 @@ export default function EmployerDashboard() {
                 color: AppColors.textDark,
               }}
             >
-              Recent Listings
+              {t('employerDashboard.recent_listings')}
             </h2>
             <button
               onClick={() => navigate('/my-listings')}
               className="flex items-center gap-1"
+              style={{ minHeight: '44px' }}
             >
               <span
                 style={{
@@ -217,7 +220,7 @@ export default function EmployerDashboard() {
                   color: AppColors.forestGreen,
                 }}
               >
-                View All
+                {t('employerDashboard.view_all')}
               </span>
               <ChevronRight
                 className="w-4 h-4"
@@ -237,7 +240,7 @@ export default function EmployerDashboard() {
                   color: AppColors.textDark,
                 }}
               >
-                No jobs posted yet
+                {t('employerDashboard.no_jobs_title')}
               </h3>
               <p
                 className="mb-6"
@@ -247,11 +250,11 @@ export default function EmployerDashboard() {
                   color: AppColors.textMuted,
                 }}
               >
-                Post your first job to start finding workers
+                {t('employerDashboard.no_jobs_subtitle')}
               </p>
               <button
                 onClick={() => navigate('/post-job')}
-                className="px-6 py-3 rounded-2xl"
+                className="px-6 py-3.5 rounded-2xl"
                 style={{
                   backgroundColor: AppColors.greenLight,
                   fontFamily: 'DM Sans, sans-serif',
@@ -259,7 +262,7 @@ export default function EmployerDashboard() {
                   color: AppColors.surfaceWhite,
                 }}
               >
-                Post a Job
+                {t('employerDashboard.post_job')}
               </button>
             </div>
           ) : (
@@ -295,7 +298,7 @@ export default function EmployerDashboard() {
                       }}
                     >
                       <span
-                        className="text-xs"
+                        className="text-[13px]"
                         style={{
                           fontFamily: 'DM Sans, sans-serif',
                           fontWeight: 600,
@@ -337,7 +340,7 @@ export default function EmployerDashboard() {
                           color: AppColors.textMuted,
                         }}
                       >
-                        {job.applicantCount || 0} applicants
+                        {job.applicantCount || 0} {t('employerDashboard.applicants')}
                       </span>
                     </div>
                   </div>

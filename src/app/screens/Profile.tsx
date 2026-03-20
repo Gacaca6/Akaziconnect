@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft, Settings, ChevronRight, LogOut } from 'lucide-react';
 import BottomNav from '../components/BottomNav';
@@ -46,6 +47,7 @@ function loadProfile(): SeekerProfile | null {
 
 /* ── Component ────────────────────────────────────────────────── */
 export default function Profile() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const profile = loadProfile();
 
@@ -99,10 +101,10 @@ export default function Profile() {
 
   /* Account menu rows */
   const accountItems = [
-    { emoji: '🌍', label: 'Language Settings', action: () => navigate('/seeker-profile-setup', { state: { initialStep: 3 } }) },
-    { emoji: '🔒', label: 'Privacy & Security', action: () => navigate('/privacy') },
-    { emoji: '❓', label: 'Help & Support', action: () => navigate('/help') },
-    { emoji: '📞', label: 'Contact Us', action: () => navigate('/contact') },
+    { emoji: '🌍', key: 'language_settings', label: t('profile.language_settings'), action: () => navigate('/seeker-profile-setup', { state: { initialStep: 3 } }) },
+    { emoji: '🔒', key: 'privacy', label: t('profile.privacy'), action: () => navigate('/privacy') },
+    { emoji: '❓', key: 'help', label: t('profile.help'), action: () => navigate('/help') },
+    { emoji: '📞', key: 'contact', label: t('profile.contact'), action: () => navigate('/contact') },
   ];
 
   const handleSignOut = () => {
@@ -123,7 +125,7 @@ export default function Profile() {
         <div className="flex items-center justify-between mb-5">
           <button
             onClick={() => navigate(-1)}
-            className="p-2 rounded-xl"
+            className="p-2.5 rounded-xl"
             style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
           >
             <ArrowLeft className="w-6 h-6 text-white" />
@@ -137,12 +139,12 @@ export default function Profile() {
               fontSize: '18px',
             }}
           >
-            My Profile
+            {t('profile.title')}
           </h1>
 
           <button
             onClick={() => navigate('/privacy')}
-            className="p-2 rounded-xl"
+            className="p-2.5 rounded-xl"
             style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
           >
             <Settings className="w-6 h-6 text-white" />
@@ -191,7 +193,7 @@ export default function Profile() {
 
           <button
             onClick={() => navigate('/seeker-profile-setup')}
-            className="px-5 py-2 rounded-full"
+            className="px-5 py-2.5 rounded-full"
             style={{
               border: '1.5px solid rgba(255, 255, 255, 0.4)',
               backgroundColor: 'transparent',
@@ -205,7 +207,7 @@ export default function Profile() {
                 fontSize: '13px',
               }}
             >
-              Edit Profile
+              {t('profile.edit_profile')}
             </span>
           </button>
         </div>
@@ -231,9 +233,12 @@ export default function Profile() {
                 color: AppColors.textDark,
               }}
             >
-              My Skills
+              {t('profile.my_skills')}
             </h3>
-            <button onClick={() => navigate('/seeker-profile-setup', { state: { initialStep: 1 } })}>
+            <button
+              onClick={() => navigate('/seeker-profile-setup', { state: { initialStep: 1 } })}
+              style={{ minHeight: '44px' }}
+            >
               <span
                 style={{
                   fontFamily: 'DM Sans, sans-serif',
@@ -242,7 +247,7 @@ export default function Profile() {
                   color: AppColors.forestGreen,
                 }}
               >
-                Edit Skills
+                {t('profile.edit_skills')}
               </span>
             </button>
           </div>
@@ -280,7 +285,7 @@ export default function Profile() {
                 color: AppColors.textMuted,
               }}
             >
-              No skills added yet
+              {t('profileSetup.no_skills')}
             </p>
           )}
         </div>
@@ -302,7 +307,7 @@ export default function Profile() {
               color: AppColors.textDark,
             }}
           >
-            Availability
+            {t('profile.availability')}
           </h3>
           <div className="space-y-3">
             <div className="flex items-center gap-3">
@@ -311,11 +316,11 @@ export default function Profile() {
                 <p
                   style={{
                     fontFamily: 'DM Sans, sans-serif',
-                    fontSize: '12px',
+                    fontSize: '13px',
                     color: AppColors.textMuted,
                   }}
                 >
-                  Available
+                  {t('profile.available')}
                 </p>
                 <p
                   style={{
@@ -336,11 +341,11 @@ export default function Profile() {
                 <p
                   style={{
                     fontFamily: 'DM Sans, sans-serif',
-                    fontSize: '12px',
+                    fontSize: '13px',
                     color: AppColors.textMuted,
                   }}
                 >
-                  Days per week
+                  {t('profile.days_per_week')}
                 </p>
                 <p
                   style={{
@@ -374,7 +379,7 @@ export default function Profile() {
               color: AppColors.textDark,
             }}
           >
-            Application Language
+            {t('profile.app_language')}
           </h3>
           <p
             style={{
@@ -405,13 +410,13 @@ export default function Profile() {
               color: AppColors.textDark,
             }}
           >
-            My Activity
+            {t('profile.my_activity')}
           </h3>
           <div className="grid grid-cols-3 gap-3">
             {[
-              { emoji: '📋', value: applicationCount.toString(), label: 'Applied', action: () => navigate('/applied') },
-              { emoji: '💼', value: savedCount.toString(), label: 'Saved', action: () => navigate('/saved-jobs') },
-              { emoji: '⭐', value: '—', label: 'Rating', action: undefined },
+              { emoji: '📋', value: applicationCount.toString(), label: t('profile.applications'), action: () => navigate('/applied') },
+              { emoji: '💼', value: savedCount.toString(), label: t('profile.saved_jobs'), action: () => navigate('/saved-jobs') },
+              { emoji: '⭐', value: '—', label: t('profile.rating'), action: undefined },
             ].map((stat) => (
               <button
                 key={stat.label}
@@ -433,7 +438,7 @@ export default function Profile() {
                 <p
                   style={{
                     fontFamily: 'DM Sans, sans-serif',
-                    fontSize: '11px',
+                    fontSize: '13px',
                     color: AppColors.textMuted,
                   }}
                 >
@@ -472,7 +477,7 @@ export default function Profile() {
                   color: AppColors.textDark,
                 }}
               >
-                Notifications
+                {t('profile.notifications')}
               </span>
             </div>
             <button
@@ -492,7 +497,7 @@ export default function Profile() {
           {/* Navigable menu rows */}
           {accountItems.map((item, index) => (
             <button
-              key={item.label}
+              key={item.key}
               onClick={item.action}
               className="w-full flex items-center justify-between px-5 py-4"
               style={{
@@ -547,7 +552,7 @@ export default function Profile() {
               color: AppColors.skipRed,
             }}
           >
-            Sign Out
+            {t('profile.sign_out')}
           </span>
         </button>
         </div>

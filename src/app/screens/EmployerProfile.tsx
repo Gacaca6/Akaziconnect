@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft, LogOut, Settings, ChevronRight } from 'lucide-react';
 import EmployerBottomNav from '../components/EmployerBottomNav';
@@ -26,6 +27,7 @@ function loadProfile(): EmployerProfileData | null {
 
 export default function EmployerProfile() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const profile = loadProfile();
 
   const orgName = profile?.orgName || '—';
@@ -55,9 +57,9 @@ export default function EmployerProfile() {
   };
 
   const menuItems = [
-    { emoji: '🏢', label: 'Organisation Details', action: () => navigate('/employer-profile-setup') },
-    { emoji: '🔒', label: 'Privacy & Security', action: () => navigate('/privacy') },
-    { emoji: '❓', label: 'Help & Support', action: () => navigate('/help') },
+    { emoji: '🏢', label: t('employerProfile.org_details'), action: () => navigate('/employer-profile-setup') },
+    { emoji: '🔒', label: t('employerProfile.privacy'), action: () => navigate('/privacy') },
+    { emoji: '❓', label: t('employerProfile.help'), action: () => navigate('/help') },
   ];
 
   return (
@@ -74,7 +76,7 @@ export default function EmployerProfile() {
         <div className="flex items-center justify-between mb-5">
           <button
             onClick={() => navigate(-1)}
-            className="p-2 rounded-xl"
+            className="p-2.5 rounded-xl"
             style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
           >
             <ArrowLeft className="w-6 h-6 text-white" />
@@ -87,11 +89,11 @@ export default function EmployerProfile() {
               fontSize: '18px',
             }}
           >
-            Employer Profile
+            {t('employerProfile.title')}
           </h1>
           <button
             onClick={() => navigate('/privacy')}
-            className="p-2 rounded-xl"
+            className="p-2.5 rounded-xl"
             style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
           >
             <Settings className="w-6 h-6 text-white" />
@@ -181,7 +183,7 @@ export default function EmployerProfile() {
                     color: AppColors.textDark,
                   }}
                 >
-                  Notifications
+                  {t('employerProfile.notifications')}
                 </span>
               </div>
               <button
@@ -256,7 +258,7 @@ export default function EmployerProfile() {
                 color: AppColors.skipRed,
               }}
             >
-              Sign Out
+              {t('employerProfile.sign_out')}
             </span>
           </button>
         </div>

@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { LogOut } from 'lucide-react';
 
 export default function SignOut() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSignOut = () => {
     const keysToKeep = ['onboardingComplete'];
@@ -57,7 +59,7 @@ export default function SignOut() {
             color: AppColors.textDark,
           }}
         >
-          Sign Out?
+          {t('signOut.title')}
         </h1>
 
         <p
@@ -70,7 +72,7 @@ export default function SignOut() {
             maxWidth: 320,
           }}
         >
-          Are you sure you want to sign out of Akazi Connect? You will need to log in again to access your account.
+          {t('signOut.subtitle')}
         </p>
 
         {/* Buttons */}
@@ -87,7 +89,7 @@ export default function SignOut() {
               border: 'none',
             }}
           >
-            Yes, Sign Out
+            {t('signOut.yes')}
           </button>
 
           <button
@@ -102,7 +104,7 @@ export default function SignOut() {
               border: `2px solid ${AppColors.forestGreen}`,
             }}
           >
-            No, Go Back
+            {t('signOut.no')}
           </button>
         </div>
 
@@ -114,7 +116,7 @@ export default function SignOut() {
             color: AppColors.textMuted,
           }}
         >
-          Your profile will be saved when you sign back in
+          {t('signOut.reassurance')}
         </p>
       </div>
     </div>

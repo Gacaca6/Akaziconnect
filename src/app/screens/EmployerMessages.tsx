@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { Search } from 'lucide-react';
 import EmployerBottomNav from '../components/EmployerBottomNav';
@@ -61,6 +62,7 @@ function timeAgo(isoString: string): string {
 
 export default function EmployerMessages() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const conversations = loadEmployerConversations();
 
@@ -84,7 +86,7 @@ export default function EmployerMessages() {
           className="text-2xl text-white mb-4"
           style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700 }}
         >
-          Messages
+          {t('messages.title')}
         </h1>
 
         {/* Search Bar */}
@@ -95,7 +97,7 @@ export default function EmployerMessages() {
           />
           <input
             type="text"
-            placeholder="Search applicants..."
+            placeholder={t('messages.search_placeholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-12 pr-4 py-3 rounded-xl"
@@ -129,7 +131,7 @@ export default function EmployerMessages() {
                 color: AppColors.textDark,
               }}
             >
-              {searchQuery ? 'No results found' : 'No messages yet'}
+              {searchQuery ? 'No results found' : t('messages.empty_title')}
             </h2>
             <p
               className="text-center mb-6"
@@ -141,7 +143,7 @@ export default function EmployerMessages() {
             >
               {searchQuery
                 ? 'Try searching with different keywords'
-                : 'When applicants apply to your jobs, you can message them here'}
+                : t('messages.empty_subtitle')}
             </p>
             {!searchQuery && (
               <button
@@ -154,7 +156,7 @@ export default function EmployerMessages() {
                   color: AppColors.surfaceWhite,
                 }}
               >
-                Post a Job
+                {t('myListings.post_job')}
               </button>
             )}
           </div>
@@ -218,7 +220,7 @@ export default function EmployerMessages() {
                             />
                           )}
                           <span
-                            className="text-xs"
+                            className="text-[13px]"
                             style={{
                               fontFamily: 'DM Sans, sans-serif',
                               color: AppColors.textMuted,
@@ -230,7 +232,7 @@ export default function EmployerMessages() {
                       </div>
 
                       <p
-                        className="text-xs truncate mb-1"
+                        className="text-[13px] truncate mb-1"
                         style={{
                           fontFamily: 'DM Sans, sans-serif',
                           color: AppColors.textMuted,

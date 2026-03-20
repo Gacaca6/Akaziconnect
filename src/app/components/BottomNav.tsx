@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { Briefcase, FileText, MessageCircle, User } from 'lucide-react';
 
@@ -6,15 +7,16 @@ interface BottomNavProps {
   activeTab: 'jobs' | 'applied' | 'messages' | 'profile';
 }
 
-const tabs = [
-  { id: 'jobs', icon: Briefcase, label: 'Jobs', path: '/swipe-feed' },
-  { id: 'applied', icon: FileText, label: 'Applied', path: '/applied' },
-  { id: 'messages', icon: MessageCircle, label: 'Messages', path: '/messages' },
-  { id: 'profile', icon: User, label: 'Profile', path: '/profile' },
+const tabDefs = [
+  { id: 'jobs', icon: Briefcase, labelKey: 'nav.jobs', path: '/swipe-feed' },
+  { id: 'applied', icon: FileText, labelKey: 'nav.applied', path: '/applied' },
+  { id: 'messages', icon: MessageCircle, labelKey: 'nav.messages', path: '/messages' },
+  { id: 'profile', icon: User, labelKey: 'nav.profile', path: '/profile' },
 ] as const;
 
 export default function BottomNav({ activeTab }: BottomNavProps) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div
@@ -25,7 +27,7 @@ export default function BottomNav({ activeTab }: BottomNavProps) {
       }}
     >
       <div className="flex justify-around items-center max-w-md mx-auto">
-        {tabs.map((tab) => {
+        {tabDefs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
 
@@ -43,14 +45,14 @@ export default function BottomNav({ activeTab }: BottomNavProps) {
                 style={{ color: isActive ? AppColors.forestGreen : AppColors.textMuted }}
               />
               <span
-                className="text-xs"
+                className="text-[13px]"
                 style={{
                   fontFamily: 'DM Sans, sans-serif',
                   fontWeight: isActive ? 600 : 400,
                   color: isActive ? AppColors.forestGreen : AppColors.textMuted
                 }}
               >
-                {tab.label}
+                {t(tab.labelKey)}
               </span>
             </button>
           );

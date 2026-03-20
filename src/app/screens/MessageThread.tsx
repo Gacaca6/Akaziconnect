@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft, Send } from 'lucide-react';
 
@@ -53,6 +54,7 @@ function formatTime(isoString: string): string {
 }
 
 export default function MessageThread() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const conversation = location.state?.conversation as Conversation | undefined;
@@ -180,7 +182,7 @@ export default function MessageThread() {
       >
         <button
           onClick={() => navigate('/messages')}
-          className="p-2 rounded-xl"
+          className="p-2.5 rounded-xl"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
         >
           <ArrowLeft className="w-6 h-6 text-white" />
@@ -273,7 +275,7 @@ export default function MessageThread() {
                   className="mt-1 px-1"
                   style={{
                     fontFamily: 'DM Sans, sans-serif',
-                    fontSize: '11px',
+                    fontSize: '13px',
                     color: AppColors.textMuted,
                   }}
                 >
@@ -299,7 +301,7 @@ export default function MessageThread() {
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Type a message..."
+            placeholder={t('messageThread.type_message')}
             rows={1}
             className="w-full px-4 py-3 rounded-2xl resize-none focus:outline-none"
             style={{

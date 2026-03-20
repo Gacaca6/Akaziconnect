@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft, Mail, Phone, Send } from 'lucide-react';
 
 export default function Contact() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [message, setMessage] = useState('');
   const [sent, setSent] = useState(false);
 
@@ -26,7 +28,7 @@ export default function Contact() {
       >
         <button
           onClick={() => navigate(-1)}
-          className="p-2 rounded-xl"
+          className="p-2.5 rounded-xl"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
         >
           <ArrowLeft className="w-6 h-6 text-white" />
@@ -39,7 +41,7 @@ export default function Contact() {
             fontSize: '18px',
           }}
         >
-          Contact Us
+          {t('contact.title')}
         </h1>
       </div>
 
@@ -68,7 +70,7 @@ export default function Contact() {
             </div>
             <div>
               <p
-                className="text-xs mb-0.5"
+                className="text-[13px] mb-0.5"
                 style={{
                   fontFamily: 'DM Sans, sans-serif',
                   color: AppColors.textMuted,
@@ -104,7 +106,7 @@ export default function Contact() {
             </div>
             <div>
               <p
-                className="text-xs mb-0.5"
+                className="text-[13px] mb-0.5"
                 style={{
                   fontFamily: 'DM Sans, sans-serif',
                   color: AppColors.textMuted,
@@ -186,7 +188,7 @@ export default function Contact() {
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Describe your issue or question..."
+                  placeholder={t('contact.placeholder')}
                   rows={5}
                   className="w-full p-4 rounded-xl resize-none focus:outline-none mb-4"
                   style={{
@@ -201,7 +203,7 @@ export default function Contact() {
                 <button
                   onClick={handleSend}
                   disabled={!message.trim()}
-                  className="w-full py-3 rounded-2xl flex items-center justify-center gap-2"
+                  className="w-full py-3.5 rounded-2xl flex items-center justify-center gap-2"
                   style={{
                     backgroundColor: message.trim()
                       ? AppColors.greenLight
@@ -213,7 +215,7 @@ export default function Contact() {
                   }}
                 >
                   <Send className="w-4 h-4" />
-                  Send Message
+                  {t('contact.send')}
                 </button>
               </>
             )}

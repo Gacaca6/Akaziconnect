@@ -9,8 +9,16 @@ export default function SplashScreen() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const done = localStorage.getItem('onboardingComplete');
-      navigate(done === 'true' ? '/role-selection' : '/onboarding');
+      const onboardingComplete = localStorage.getItem('onboardingComplete');
+      const languageSelected = localStorage.getItem('languageSelected');
+
+      if (!onboardingComplete) {
+        navigate('/onboarding');
+      } else if (!languageSelected) {
+        navigate('/language-selection');
+      } else {
+        navigate('/role-selection');
+      }
     }, 2500);
 
     return () => clearTimeout(timer);

@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { AppColors } from '../constants/colors';
 import { ArrowLeft, Plus, MapPin, Calendar, Users } from 'lucide-react';
 import EmployerBottomNav from '../components/EmployerBottomNav';
@@ -33,6 +34,7 @@ function loadJobs(): EmployerJob[] {
 
 export default function MyListings() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [jobs, setJobs] = useState<EmployerJob[]>(loadJobs);
 
   const closeJob = useCallback(
@@ -59,7 +61,7 @@ export default function MyListings() {
       >
         <button
           onClick={() => navigate(-1)}
-          className="p-2 rounded-xl"
+          className="p-2.5 rounded-xl"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
         >
           <ArrowLeft className="w-6 h-6 text-white" />
@@ -72,7 +74,7 @@ export default function MyListings() {
             fontSize: '18px',
           }}
         >
-          My Job Listings
+          {t('myListings.title')}
         </h1>
         <div className="w-10" />
       </div>
@@ -98,7 +100,7 @@ export default function MyListings() {
                 color: AppColors.textDark,
               }}
             >
-              No jobs posted yet
+              {t('myListings.empty_title')}
             </h2>
             <p
               className="text-center mb-6"
@@ -108,7 +110,7 @@ export default function MyListings() {
                 color: AppColors.textMuted,
               }}
             >
-              Tap the button below to post your first job
+              {t('myListings.empty_subtitle')}
             </p>
             <button
               onClick={() => navigate('/post-job')}
@@ -122,7 +124,7 @@ export default function MyListings() {
                 boxShadow: '0 4px 12px rgba(26, 122, 74, 0.2)',
               }}
             >
-              Post a Job
+              {t('myListings.post_job')}
             </button>
           </div>
         ) : (
@@ -162,7 +164,7 @@ export default function MyListings() {
                       }}
                     >
                       <span
-                        className="text-xs"
+                        className="text-[13px]"
                         style={{
                           fontFamily: 'DM Sans, sans-serif',
                           fontWeight: 600,
@@ -171,7 +173,7 @@ export default function MyListings() {
                             : AppColors.textMuted,
                         }}
                       >
-                        {isActive ? 'Active' : 'Closed'}
+                        {isActive ? t('myListings.active') : t('myListings.closed')}
                       </span>
                     </div>
                   </div>
@@ -187,7 +189,7 @@ export default function MyListings() {
                         style={{ color: AppColors.forestGreen }}
                       />
                       <span
-                        className="text-xs"
+                        className="text-[13px]"
                         style={{
                           fontFamily: 'DM Sans, sans-serif',
                           fontWeight: 500,
@@ -207,7 +209,7 @@ export default function MyListings() {
                           style={{ color: AppColors.forestGreen }}
                         />
                         <span
-                          className="text-xs"
+                          className="text-[13px]"
                           style={{
                             fontFamily: 'DM Sans, sans-serif',
                             fontWeight: 500,
@@ -251,7 +253,7 @@ export default function MyListings() {
                           color: AppColors.textDark,
                         }}
                       >
-                        👥 {job.applicants || 0} applicants
+                        👥 {job.applicants || 0} {t('myListings.applicants')}
                       </span>
                     </div>
 
@@ -265,11 +267,11 @@ export default function MyListings() {
                           backgroundColor: AppColors.greenBackground,
                           fontFamily: 'DM Sans, sans-serif',
                           fontWeight: 600,
-                          fontSize: '12px',
+                          fontSize: '13px',
                           color: AppColors.forestGreen,
                         }}
                       >
-                        View Applicants
+                        {t('myListings.view_applicants')}
                       </button>
                       {isActive && (
                         <button
@@ -280,11 +282,11 @@ export default function MyListings() {
                             border: `1px solid ${AppColors.border}`,
                             fontFamily: 'DM Sans, sans-serif',
                             fontWeight: 600,
-                            fontSize: '12px',
+                            fontSize: '13px',
                             color: AppColors.textMuted,
                           }}
                         >
-                          Close Job
+                          {t('myListings.close_job')}
                         </button>
                       )}
                     </div>
