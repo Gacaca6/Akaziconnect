@@ -42,9 +42,9 @@ export default function PhoneEntry() {
         <div className="w-10" />
       </div>
 
-      {/* Content */}
-      <div className="flex-1 px-5 py-8">
-        <div className="max-w-md mx-auto">
+      {/* Content — scrollable flex column */}
+      <div className="flex-1 px-5 py-8" style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch', display: 'flex', flexDirection: 'column' }}>
+        <div className="max-w-md mx-auto w-full" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
           <h2
             className="text-2xl mb-2"
             style={{
@@ -104,7 +104,10 @@ export default function PhoneEntry() {
             />
           </div>
 
-          {/* Continue Button */}
+          {/* Spacer pushes button to bottom */}
+          <div style={{ flex: 1 }} />
+
+          {/* Continue Button — always reachable */}
           <button
             onClick={handleContinue}
             disabled={!isValid}
@@ -116,6 +119,7 @@ export default function PhoneEntry() {
               color: AppColors.surfaceWhite,
               fontSize: '16px',
               cursor: isValid ? 'pointer' : 'not-allowed',
+              flexShrink: 0,
             }}
           >
             {t('phoneEntry.continue')}
@@ -128,6 +132,7 @@ export default function PhoneEntry() {
               fontFamily: 'DM Sans, sans-serif',
               fontSize: '13px',
               color: AppColors.textMuted,
+              flexShrink: 0,
             }}
           >
             {t('phoneEntry.reassurance')}

@@ -106,9 +106,9 @@ export default function OTPVerification() {
         <div className="w-10" />
       </div>
 
-      {/* Content */}
-      <div className="flex-1 px-5 py-8">
-        <div className="max-w-md mx-auto">
+      {/* Content — scrollable flex column */}
+      <div className="flex-1 px-5 py-8" style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch', display: 'flex', flexDirection: 'column' }}>
+        <div className="max-w-md mx-auto w-full" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
           <h2
             className="text-2xl mb-2"
             style={{
@@ -186,7 +186,10 @@ export default function OTPVerification() {
             )}
           </p>
 
-          {/* Verify Button */}
+          {/* Spacer pushes button to bottom */}
+          <div style={{ flex: 1 }} />
+
+          {/* Verify Button — always reachable */}
           <button
             onClick={handleVerify}
             disabled={!isComplete}
@@ -198,6 +201,7 @@ export default function OTPVerification() {
               color: AppColors.surfaceWhite,
               fontSize: '16px',
               cursor: isComplete ? 'pointer' : 'not-allowed',
+              flexShrink: 0,
             }}
           >
             {t('otp.verify')}

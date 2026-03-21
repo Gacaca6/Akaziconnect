@@ -20,9 +20,20 @@ export default function SignOut() {
   };
 
   return (
-    <div className="h-full flex flex-col" style={{ backgroundColor: AppColors.forestDark }}>
-      {/* Top section — icon centered */}
-      <div style={{ flex: '0 0 40%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{
+      minHeight: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: AppColors.forestDark,
+    }}>
+      {/* Top section — icon centered, shrinks if needed */}
+      <div style={{
+        flex: '0 0 auto',
+        padding: '48px 24px 32px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
         <div
           className="flex items-center justify-center"
           style={{
@@ -36,18 +47,19 @@ export default function SignOut() {
         </div>
       </div>
 
-      {/* Bottom card */}
+      {/* Bottom card — takes remaining space, scrollable if needed */}
       <div
         style={{
-          flex: '0 0 60%',
+          flex: 1,
           backgroundColor: AppColors.surfaceWhite,
           borderTopLeftRadius: 32,
           borderTopRightRadius: 32,
           display: 'flex',
-          flexDirection: 'column' as const,
+          flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
-          padding: '32px 24px',
+          overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          padding: '32px 24px 40px',
         }}
       >
         <h1
@@ -75,8 +87,11 @@ export default function SignOut() {
           {t('signOut.subtitle')}
         </p>
 
-        {/* Buttons */}
-        <div className="w-full space-y-3" style={{ maxWidth: 320 }}>
+        {/* Spacer pushes buttons to bottom on tall screens */}
+        <div style={{ flex: 1 }} />
+
+        {/* Buttons — always reachable */}
+        <div className="w-full space-y-3" style={{ maxWidth: 320, flexShrink: 0 }}>
           <button
             onClick={handleSignOut}
             className="w-full py-4 rounded-2xl"
@@ -114,6 +129,7 @@ export default function SignOut() {
             fontFamily: 'DM Sans, sans-serif',
             fontSize: 13,
             color: AppColors.textMuted,
+            flexShrink: 0,
           }}
         >
           {t('signOut.reassurance')}

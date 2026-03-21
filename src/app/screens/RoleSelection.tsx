@@ -37,24 +37,24 @@ export default function RoleSelection() {
         </div>
       </div>
 
-      {/* Content */}
-      <div className="flex-1 px-5 py-8">
-        <div className="max-w-md mx-auto">
-          <h2 
+      {/* Content — scrollable flex column */}
+      <div className="flex-1 px-5 py-8" style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch', display: 'flex', flexDirection: 'column' }}>
+        <div className="max-w-md mx-auto w-full" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+          <h2
             className="text-2xl mb-2"
-            style={{ 
-              fontFamily: 'Space Grotesk, sans-serif', 
+            style={{
+              fontFamily: 'Space Grotesk, sans-serif',
               fontWeight: 700,
-              color: AppColors.textDark 
+              color: AppColors.textDark
             }}
           >
             {t('roleSelection.welcome')}
           </h2>
-          <p 
+          <p
             className="mb-8"
-            style={{ 
+            style={{
               fontFamily: 'DM Sans, sans-serif',
-              color: AppColors.textMuted 
+              color: AppColors.textMuted
             }}
           >
             {t('roleSelection.subtitle')}
@@ -69,37 +69,37 @@ export default function RoleSelection() {
               style={{
                 backgroundColor: AppColors.surfaceWhite,
                 border: `3px solid ${selectedRole === 'seeker' ? AppColors.forestGreen : 'transparent'}`,
-                boxShadow: selectedRole === 'seeker' 
-                  ? '0 8px 24px rgba(26, 122, 74, 0.15)' 
+                boxShadow: selectedRole === 'seeker'
+                  ? '0 8px 24px rgba(26, 122, 74, 0.15)'
                   : '0 2px 8px rgba(0, 0, 0, 0.05)'
               }}
             >
               <div className="flex items-start gap-4">
-                <div 
+                <div
                   className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
                   style={{ backgroundColor: AppColors.greenBackground }}
                 >
-                  <Briefcase 
-                    className="w-8 h-8" 
+                  <Briefcase
+                    className="w-8 h-8"
                     style={{ color: AppColors.forestGreen }}
                   />
                 </div>
                 <div className="text-left flex-1">
-                  <h3 
+                  <h3
                     className="text-xl mb-1"
-                    style={{ 
-                      fontFamily: 'Space Grotesk, sans-serif', 
+                    style={{
+                      fontFamily: 'Space Grotesk, sans-serif',
                       fontWeight: 700,
-                      color: AppColors.textDark 
+                      color: AppColors.textDark
                     }}
                   >
                     {t('roleSelection.seeker_title')}
                   </h3>
-                  <p 
+                  <p
                     className="text-sm"
-                    style={{ 
+                    style={{
                       fontFamily: 'DM Sans, sans-serif',
-                      color: AppColors.textMuted 
+                      color: AppColors.textMuted
                     }}
                   >
                     {t('roleSelection.seeker_subtitle')}
@@ -115,37 +115,37 @@ export default function RoleSelection() {
               style={{
                 backgroundColor: AppColors.surfaceWhite,
                 border: `3px solid ${selectedRole === 'employer' ? AppColors.forestGreen : 'transparent'}`,
-                boxShadow: selectedRole === 'employer' 
-                  ? '0 8px 24px rgba(26, 122, 74, 0.15)' 
+                boxShadow: selectedRole === 'employer'
+                  ? '0 8px 24px rgba(26, 122, 74, 0.15)'
                   : '0 2px 8px rgba(0, 0, 0, 0.05)'
               }}
             >
               <div className="flex items-start gap-4">
-                <div 
+                <div
                   className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
                   style={{ backgroundColor: AppColors.greenBackground }}
                 >
-                  <Building2 
-                    className="w-8 h-8" 
+                  <Building2
+                    className="w-8 h-8"
                     style={{ color: AppColors.forestGreen }}
                   />
                 </div>
                 <div className="text-left flex-1">
-                  <h3 
+                  <h3
                     className="text-xl mb-1"
-                    style={{ 
-                      fontFamily: 'Space Grotesk, sans-serif', 
+                    style={{
+                      fontFamily: 'Space Grotesk, sans-serif',
                       fontWeight: 700,
-                      color: AppColors.textDark 
+                      color: AppColors.textDark
                     }}
                   >
                     {t('roleSelection.employer_title')}
                   </h3>
-                  <p 
+                  <p
                     className="text-sm"
-                    style={{ 
+                    style={{
                       fontFamily: 'DM Sans, sans-serif',
-                      color: AppColors.textMuted 
+                      color: AppColors.textMuted
                     }}
                   >
                     {t('roleSelection.employer_subtitle')}
@@ -155,17 +155,20 @@ export default function RoleSelection() {
             </button>
           </div>
 
-          {/* Continue Button */}
+          {/* Continue Button — always reachable */}
           {selectedRole && (
             <button
               onClick={handleContinue}
-              className="w-full mt-8 py-4 rounded-2xl transition-all"
+              className="w-full py-4 rounded-2xl transition-all"
               style={{
                 backgroundColor: AppColors.greenLight,
                 fontFamily: 'DM Sans, sans-serif',
                 fontWeight: 600,
                 color: AppColors.surfaceWhite,
-                fontSize: '16px'
+                fontSize: '16px',
+                flexShrink: 0,
+                marginTop: 'auto',
+                paddingTop: 16,
               }}
             >
               {t('roleSelection.continue')}
